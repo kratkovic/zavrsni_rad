@@ -5,17 +5,17 @@ public class Smjestaj extends Entitet{
 	private String naziv;
 	private String vrsta;
 	private double cijena;
-	
-	
+	private Motodogadjaj motodogadjaj;
 	
 	public Smjestaj() {
 		super();
 	}
-	public Smjestaj(int sifra, String naziv, String vrsta, double cijena) {
+	public Smjestaj(int sifra, String naziv, String vrsta, double cijena, Motodogadjaj motodogadjaj) {
 		super(sifra);
 		this.naziv = naziv;
 		this.vrsta = vrsta;
 		this.cijena = cijena;
+		this.motodogadjaj = motodogadjaj;
 	}
 	public String getNaziv() {
 		return naziv;
@@ -35,6 +35,17 @@ public class Smjestaj extends Entitet{
 	public void setCijena(double cijena) {
 		this.cijena = cijena;
 	}
+	public Motodogadjaj getMotodogadjaj() {
+		return motodogadjaj;
+	}
+	public void setMotodogadjaj(Motodogadjaj motodogadjaj) {
+		this.motodogadjaj = motodogadjaj;
+	}
+	
+	
+	
+	
+	
 	
 
 }
