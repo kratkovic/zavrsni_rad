@@ -5,24 +5,25 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
 
-
 @Entity
-public class MotoDogadaj extends Entitet{
-    
+public class MotoDogadaj extends Entitet {
 
-private String naziv;
-private String mjestoodrzavanja;
-private String odgovorniclan;
-private Date datumpocetka;
-@ManyToOne
-private MotoKlub motoklub;
+    private String naziv;
+    private String mjestoodrzavanja;
+    private String odgovorniclan;
+    private Date datumpocetka;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "motoklub")
+    private MotoKlub motoklub;
 
-public MotoDogadaj(){
-    super();
-}
+    public MotoDogadaj() {
+        super();
+    }
 
     public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, int sifra) {
         super(sifra);
@@ -33,7 +34,6 @@ public MotoDogadaj(){
         this.motoklub = motoklub;
     }
 
-    
     public String getNaziv() {
         return naziv;
     }

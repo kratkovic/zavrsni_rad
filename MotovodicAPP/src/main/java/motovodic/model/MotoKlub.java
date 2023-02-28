@@ -5,6 +5,9 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -17,9 +20,15 @@ public class MotoKlub extends Entitet{
     private boolean registracija;
     
     
+     @OneToMany(mappedBy = "motoklub")
+    private List<MotoDogadaj> motoDogadaji;
+    
+    
+    
     
     public MotoKlub(){
         super();
+        motoDogadaji = new ArrayList<>();
     }
 
     public MotoKlub(String naziv, String mjesto, Integer brojclanova, boolean registracija) {
@@ -63,10 +72,18 @@ public class MotoKlub extends Entitet{
         this.registracija = registracija;
     }
     
+    public List<MotoDogadaj> getMotoDogadaji() {
+        return motoDogadaji;
+    }
+
+    public void setMotoDogadaji(List<MotoDogadaj> motoDogadaji) {
+        this.motoDogadaji = motoDogadaji;
+    
+    }
     @Override
 	public String toString() {
 		
-		return naziv + " " + mjesto;
+	return naziv + " " + mjesto;
 
 }
 }
