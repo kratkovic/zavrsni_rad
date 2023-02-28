@@ -5,7 +5,6 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
 
@@ -19,7 +18,6 @@ private String mjestoodrzavanja;
 private String odgovorniclan;
 private Date datumpocetka;
 @ManyToOne
-@JoinColumn(name = "motoklub_sifra")
 private MotoKlub motoklub;
 
 public MotoDogadaj(){
