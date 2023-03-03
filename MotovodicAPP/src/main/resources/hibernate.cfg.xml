@@ -18,6 +18,7 @@
     
    <mapping class="motovodic.model.MotoKlub" />
    <mapping class="motovodic.model.MotoDogadaj" />
-    
+   <mapping class="motovodic.model.Smjestaj" />
+   <mapping class="motovodic.model.Servis" />
   </session-factory>
 </hibernate-configuration>
