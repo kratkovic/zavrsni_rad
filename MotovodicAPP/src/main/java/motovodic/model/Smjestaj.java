@@ -89,5 +89,9 @@ public class Smjestaj extends Entitet{
         this.motoDogadaji = motoDogadaji;
     }
     
-    
+     @Override
+	public String toString() {
+		
+	return naziv + " " + vrsta;
+}
 }
