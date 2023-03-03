@@ -5,42 +5,35 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Smjestaj extends Entitet{
     
-
     private String naziv;
     private String vrsta;
     private BigDecimal cijena;
     private MotoDogadaj motoDogadaj;
     private Servis servis;
-    
-    @OneToMany
-    private List<MotoDogadaj> motoDogadaji;
-    
-    
-    public Smjestaj(){
-        super();
-        motoDogadaji = new ArrayList<>();
-    }
 
-    public Smjestaj(String naziv, String vrsta, BigDecimal cijena, MotoDogadaj motoDogadaj, Servis servis, List<MotoDogadaj> motoDogadaji, int sifra) {
+    public Smjestaj(String naziv, String vrsta, BigDecimal cijena, MotoDogadaj motoDogadaj, Servis servis, int sifra) {
         super(sifra);
         this.naziv = naziv;
         this.vrsta = vrsta;
         this.cijena = cijena;
         this.motoDogadaj = motoDogadaj;
         this.servis = servis;
-        this.motoDogadaji = motoDogadaji;
     }
+    
+    
+    
 
+    public Smjestaj(int sifra) {
+        super(sifra);
+    }
     
     
+
     public String getNaziv() {
         return naziv;
     }
@@ -80,18 +73,7 @@ public class Smjestaj extends Entitet{
     public void setServis(Servis servis) {
         this.servis = servis;
     }
-
-    public List<MotoDogadaj> getMotoDogadaji() {
-        return motoDogadaji;
-    }
-
-    public void setMotoDogadaji(List<MotoDogadaj> motoDogadaji) {
-        this.motoDogadaji = motoDogadaji;
-    }
     
-     @Override
-	public String toString() {
-		
-	return naziv + " " + vrsta;
-}
+    
+    
 }

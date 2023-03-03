@@ -6,6 +6,7 @@ package motovodic.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Entity
 public class MotoDogadaj extends Entitet {
 
+    @Id
     private String naziv;
     private String mjestoodrzavanja;
     private String odgovorniclan;
