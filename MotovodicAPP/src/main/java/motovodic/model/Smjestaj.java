@@ -16,6 +16,10 @@ public class Smjestaj extends Entitet{
     private MotoDogadaj motoDogadaj;
     private Servis servis;
 
+    public Smjestaj(int sifra) {
+        super(sifra);
+    }
+
     public Smjestaj(String naziv, String vrsta, BigDecimal cijena, MotoDogadaj motoDogadaj, Servis servis, int sifra) {
         super(sifra);
         this.naziv = naziv;
@@ -26,11 +30,6 @@ public class Smjestaj extends Entitet{
     }
     
     
-    
-
-    public Smjestaj(int sifra) {
-        super(sifra);
-    }
     
     
 
