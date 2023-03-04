@@ -20,7 +20,7 @@ public class MotoKlub extends Entitet{
     private boolean registracija;
     
     
-     @OneToMany(mappedBy = "motoklub")
+     @OneToMany
     private List<MotoDogadaj> motoDogadaji;
     
     

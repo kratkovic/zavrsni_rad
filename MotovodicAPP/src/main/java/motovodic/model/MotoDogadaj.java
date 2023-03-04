@@ -6,8 +6,8 @@ package motovodic.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
@@ -26,11 +26,11 @@ public class MotoDogadaj extends Entitet {
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
 
-    @OneToMany(mappedBy = "motoDogadaj", fetch = FetchType.LAZY)
-    private List<Smjestaj> smjestaji = new ArrayList<>();
+    @ManyToMany
+    private List<Smjestaj> smjestaji;
 
-    @OneToMany(mappedBy = "motoDogadaj", fetch = FetchType.LAZY)
-    private List<Servis> servisi = new ArrayList<>();
+    @ManyToMany
+    private List<Servis> servisi;
 
     public MotoDogadaj() {
         super();
