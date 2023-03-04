@@ -37,13 +37,15 @@ public class MotoDogadaj extends Entitet {
         servisi = new ArrayList<>();
     }
 
-    public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, int sifra) {
+    public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, List<Smjestaj> smjestaji, List<Servis> servisi, int sifra) {
         super(sifra);
         this.naziv = naziv;
         this.mjestoodrzavanja = mjestoodrzavanja;
         this.odgovorniclan = odgovorniclan;
         this.datumpocetka = datumpocetka;
         this.motoklub = motoklub;
+        this.smjestaji = smjestaji;
+        this.servisi = servisi;
     }
 
     public String getNaziv() {
@@ -101,4 +103,8 @@ public class MotoDogadaj extends Entitet {
     public void setServisi(List<Servis> servisi) {
         this.servisi = servisi;
     }
-}
+
+    
+    }
+
+    
