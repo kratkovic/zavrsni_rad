@@ -16,7 +16,6 @@ import java.util.List;
 @Entity
 public class MotoDogadaj extends Entitet {
 
-    
     private String naziv;
     private String mjestoodrzavanja;
     private String odgovorniclan;
@@ -30,7 +29,6 @@ public class MotoDogadaj extends Entitet {
     @ManyToMany
     private List<Servis> servisi;
 
-    
     public MotoDogadaj() {
         super();
         smjestaji = new ArrayList<>();
@@ -104,7 +102,4 @@ public class MotoDogadaj extends Entitet {
         this.servisi = servisi;
     }
 
-    
-    }
-
-    
+}
