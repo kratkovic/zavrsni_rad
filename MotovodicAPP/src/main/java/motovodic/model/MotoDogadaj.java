@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 public class MotoDogadaj extends Entitet {
 
-    @Id
+    
     private String naziv;
     private String mjestoodrzavanja;
     private String odgovorniclan;
