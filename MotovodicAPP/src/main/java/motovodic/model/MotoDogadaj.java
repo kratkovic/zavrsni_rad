@@ -9,7 +9,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MotoDogadaj extends Entitet {
@@ -23,8 +26,16 @@ public class MotoDogadaj extends Entitet {
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
 
+    @OneToMany(mappedBy = "motoDogadaj", fetch = FetchType.LAZY)
+    private List<Smjestaj> smjestaji = new ArrayList<>();
+
+    @OneToMany(mappedBy = "motoDogadaj", fetch = FetchType.LAZY)
+    private List<Servis> servisi = new ArrayList<>();
+
     public MotoDogadaj() {
         super();
+        smjestaji = new ArrayList<>();
+        servisi = new ArrayList<>();
     }
 
     public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, int sifra) {
@@ -76,4 +87,19 @@ public class MotoDogadaj extends Entitet {
         this.motoklub = motoklub;
     }
 
+    public List<Smjestaj> getSmjestaji() {
+        return smjestaji;
+    }
+
+    public void setSmjestaji(List<Smjestaj> smjestaji) {
+        this.smjestaji = smjestaji;
+    }
+
+    public List<Servis> getServisi() {
+        return servisi;
+    }
+
+    public void setServisi(List<Servis> servisi) {
+        this.servisi = servisi;
+    }
 }

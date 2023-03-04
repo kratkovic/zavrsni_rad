@@ -6,22 +6,21 @@ package motovodic.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
 
 @Entity
 public class Smjestaj extends Entitet{
-    
-    @Id
+
     private String naziv;
     private String vrsta;
     private BigDecimal cijena;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "motodogadaj")
     private MotoDogadaj motoDogadaj;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "servis")
     private Servis servis;
@@ -38,10 +37,6 @@ public class Smjestaj extends Entitet{
         this.motoDogadaj = motoDogadaj;
         this.servis = servis;
     }
-    
-    
-    
-    
 
     public String getNaziv() {
         return naziv;
@@ -82,7 +77,4 @@ public class Smjestaj extends Entitet{
     public void setServis(Servis servis) {
         this.servis = servis;
     }
-    
-    
-    
 }
