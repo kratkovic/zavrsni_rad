@@ -27,10 +27,10 @@ public class MotoDogadaj extends Entitet {
 
     @ManyToMany
     private List<Smjestaj> smjestaji;
-
     @ManyToMany
     private List<Servis> servisi;
 
+    
     public MotoDogadaj() {
         super();
         smjestaji = new ArrayList<>();
