@@ -57,20 +57,20 @@ values ('"MK Brod"', 'Slavonski Brod', 100, true),
 ('"MK Osijek"', 'Osijek', 40, true),
 ('"MK Vukovar"', 'Vukovar',  50, true);
 
-insert into motodogadjaj(naziv,mjestoodrzavanja,odgovorniclan)
-values ('Mega bikers susreti', 'Poloj', 'Mario Karakaš'),
-('Osječki moto susreti', 'Tvrđa', 'Zdravko Bošnjak'),
-('Moto party MK Vukovar', 'Dunavska šetnica Vukovar', 'Kristijan Komšić');
+insert into motodogadjaj (naziv, mjestoodrzavanja, odgovorniclan, datumpocetka, motoklub)
+VALUES ('Mega bikers susreti', 'Poloj', 'Mario Karakaš', '2023-08-12 20:00:00', 1),
+('Osječki moto susreti', 'Tvrđa', 'Zdravko Bošnjak', '2023-06-25 12:00:00', 2),
+('Moto party MK Vukovar', 'Dunavska šetnica Vukovar', 'Kristijan Komšić', '2023-09-02 17:00:00', 3);
 
-insert into smjestaj(naziv,vrsta,cijena)
-values ('Guesthouse Coco', 'Hostel', 200.1),
-('Guest House Talas', 'Apartmani', 262.2),
-('Vila Rosa', 'Hostel', 360.1);
+insert into smjestaj(naziv,vrsta,cijena, motodogadjaj)
+values ('Guesthouse Coco', 'Hostel', 200.1, 1),
+('Guest House Talas', 'Apartmani', 262.2, 2 ),
+('Vila Rosa', 'Hostel', 360.1, 3);
 
-insert into servis(naziv,mjesto,radnovrijeme)
-values ('Big Bike', 'Slavonski Brod', '09_17h'),
-('Moto silver', 'Osijek', '09_17h'),
-('Docdyno tuning', 'Vinkovci', '08_16h');
+insert into servis(naziv,mjesto,radnovrijeme, smjestaj)
+values ('Big Bike', 'Slavonski Brod', '09_17h', 1),
+('Moto silver', 'Osijek', '09_17h', 2),
+('Docdyno tuning', 'Vinkovci', '08_16h', 3);
 
 
 
