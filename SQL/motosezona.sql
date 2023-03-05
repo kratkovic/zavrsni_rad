@@ -52,10 +52,10 @@ alter table smjestajservis add foreign key (smjestaj) references smjestaj(sifra)
 alter table smjestajservis add foreign key (servis) references servis(sifra);
 
 
-insert into motoklub(naziv,mjesto,registracija)
-values ('"MK Brod"', 'Slavonski Brod', true), 
-('"MK Osijek"', 'Osijek', true),
-('"MK Vukovar"', 'Vukovar', true);
+insert into motoklub(naziv,mjesto,brojclanova,registracija)
+values ('"MK Brod"', 'Slavonski Brod', 30, true), 
+('"MK Osijek"', 'Osijek', 40, true),
+('"MK Vukovar"', 'Vukovar',  50, true);
 
 insert into motodogadjaj(naziv,mjestoodrzavanja,odgovorniclan)
 values ('Mega bikers susreti', 'Poloj', 'Mario Karakaš'),

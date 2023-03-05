@@ -31,12 +31,16 @@ public class MotoKlub extends Entitet{
         motoDogadaji = new ArrayList<>();
     }
 
-    public MotoKlub(String naziv, String mjesto, Integer brojclanova, boolean registracija) {
+    public MotoKlub(String naziv, String mjesto, Integer brojclanova, boolean registracija, List<MotoDogadaj> motoDogadaji, int sifra) {
+        super(sifra);
         this.naziv = naziv;
         this.mjesto = mjesto;
         this.brojclanova = brojclanova;
         this.registracija = registracija;
+        this.motoDogadaji = motoDogadaji;
     }
+
+    
             
     
     
