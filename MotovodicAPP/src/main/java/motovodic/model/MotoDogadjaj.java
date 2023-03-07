@@ -23,6 +23,7 @@ public class MotoDogadjaj extends Entitet {
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
     @OneToMany
+    @JoinColumn(name = "motodogadjaj")
     private List<Smjestaj> smjestaji;
  
 
