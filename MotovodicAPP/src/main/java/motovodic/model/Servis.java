@@ -5,6 +5,9 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Servis extends Entitet{
@@ -12,6 +15,10 @@ public class Servis extends Entitet{
     private String naziv;
     private String mjesto;
     private String radnovrijeme;
+    
+    @OneToMany
+    @JoinColumn(name = "servis")
+    private List<Smjestaj> smjestaji;
 
     public Servis(String naziv, String mjesto, String radnovrijeme, int sifra) {
         super(sifra);

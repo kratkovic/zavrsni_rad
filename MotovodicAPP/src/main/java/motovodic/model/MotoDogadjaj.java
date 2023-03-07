@@ -7,7 +7,9 @@ package motovodic.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -20,7 +22,8 @@ public class MotoDogadjaj extends Entitet {
     @ManyToOne
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
-
+    @OneToMany
+    private List<Smjestaj> smjestaji;
  
 
     public MotoDogadjaj() {
