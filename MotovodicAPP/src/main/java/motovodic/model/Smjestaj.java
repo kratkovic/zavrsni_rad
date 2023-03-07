@@ -5,6 +5,7 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.math.BigDecimal;
 
@@ -15,6 +16,7 @@ public class Smjestaj extends Entitet{
     private String vrsta;
     private BigDecimal cijena;
     @ManyToOne
+    @JoinColumn(name = "motodogadjaj")
     private MotoDogadjaj motoDogadjaj;
     
     
