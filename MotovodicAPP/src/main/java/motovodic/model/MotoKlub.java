@@ -5,6 +5,7 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +14,14 @@ import java.util.List;
 @Entity
 public class MotoKlub extends Entitet{
 
-  
     private String naziv;
     private String mjesto;
     private Integer brojclanova;
     private boolean registracija;
     
-    
-     @OneToMany
+    @OneToMany
+    @JoinColumn(name = "motoklub")
     private List<MotoDogadaj> motoDogadaji;
-    
-    
-    
     
     public MotoKlub(){
         super();
@@ -39,10 +36,6 @@ public class MotoKlub extends Entitet{
         this.registracija = registracija;
         this.motoDogadaji = motoDogadaji;
     }
-
-    
-            
-    
     
     public String getNaziv() {
         return naziv;
@@ -82,12 +75,10 @@ public class MotoKlub extends Entitet{
 
     public void setMotoDogadaji(List<MotoDogadaj> motoDogadaji) {
         this.motoDogadaji = motoDogadaji;
-    
     }
+    
     @Override
-	public String toString() {
-		
-	return naziv + " " + mjesto;
-
-}
+    public String toString() {
+        return naziv + " " + mjesto;
+    }
 }

@@ -19,7 +19,7 @@
         <mapping class="motovodic.model.MotoKlub" />
         <mapping class="motovodic.model.MotoDogadaj" />
         <mapping class="motovodic.model.Servis" />
-        <mapping class="motovodic.model.Smjestaj" />
+       
 
   
  

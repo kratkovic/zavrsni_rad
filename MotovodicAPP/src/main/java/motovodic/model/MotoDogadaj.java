@@ -5,13 +5,10 @@
 package motovodic.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 @Entity
 public class MotoDogadaj extends Entitet {
@@ -20,30 +17,25 @@ public class MotoDogadaj extends Entitet {
     private String mjestoodrzavanja;
     private String odgovorniclan;
     private Date datumpocetka;
-    @ManyToOne(fetch = FetchType.LAZY)
+    
+    @ManyToOne
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
 
-    @ManyToMany
-    private List<Smjestaj> smjestaji;
-    @ManyToMany
-    private List<Servis> servisi;
+ 
 
     public MotoDogadaj() {
         super();
-        smjestaji = new ArrayList<>();
-        servisi = new ArrayList<>();
+       
     }
 
-    public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, List<Smjestaj> smjestaji, List<Servis> servisi, int sifra) {
+    public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, int sifra) {
         super(sifra);
         this.naziv = naziv;
         this.mjestoodrzavanja = mjestoodrzavanja;
         this.odgovorniclan = odgovorniclan;
         this.datumpocetka = datumpocetka;
         this.motoklub = motoklub;
-        this.smjestaji = smjestaji;
-        this.servisi = servisi;
     }
 
     public String getNaziv() {
@@ -86,20 +78,7 @@ public class MotoDogadaj extends Entitet {
         this.motoklub = motoklub;
     }
 
-    public List<Smjestaj> getSmjestaji() {
-        return smjestaji;
+   
     }
 
-    public void setSmjestaji(List<Smjestaj> smjestaji) {
-        this.smjestaji = smjestaji;
-    }
-
-    public List<Servis> getServisi() {
-        return servisi;
-    }
-
-    public void setServisi(List<Servis> servisi) {
-        this.servisi = servisi;
-    }
-
-}
+  
