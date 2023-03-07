@@ -11,25 +11,24 @@ import java.util.Date;
 
 
 @Entity
-public class MotoDogadaj extends Entitet {
+public class MotoDogadjaj extends Entitet {
 
     private String naziv;
     private String mjestoodrzavanja;
     private String odgovorniclan;
     private Date datumpocetka;
-    
     @ManyToOne
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
 
  
 
-    public MotoDogadaj() {
+    public MotoDogadjaj() {
         super();
        
     }
 
-    public MotoDogadaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, int sifra) {
+    public MotoDogadjaj(String naziv, String mjestoodrzavanja, String odgovorniclan, Date datumpocetka, MotoKlub motoklub, int sifra) {
         super(sifra);
         this.naziv = naziv;
         this.mjestoodrzavanja = mjestoodrzavanja;

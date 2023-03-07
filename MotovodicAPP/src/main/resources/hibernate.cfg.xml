@@ -17,7 +17,7 @@
         <property name="hbm2ddl.auto">update</property>
     
         <mapping class="motovodic.model.MotoKlub" />
-        <mapping class="motovodic.model.MotoDogadaj" />
+        <mapping class="motovodic.model.MotoDogadjaj" />
         <mapping class="motovodic.model.Servis" />
        
 

@@ -21,20 +21,20 @@ public class MotoKlub extends Entitet{
     
     @OneToMany
     @JoinColumn(name = "motoklub")
-    private List<MotoDogadaj> motoDogadaji;
+    private List<MotoDogadjaj> motoDogadjaji;
     
     public MotoKlub(){
         super();
-        motoDogadaji = new ArrayList<>();
+        motoDogadjaji = new ArrayList<>();
     }
 
-    public MotoKlub(String naziv, String mjesto, Integer brojclanova, boolean registracija, List<MotoDogadaj> motoDogadaji, int sifra) {
+    public MotoKlub(String naziv, String mjesto, Integer brojclanova, boolean registracija, List<MotoDogadjaj> motoDogadjaji, int sifra) {
         super(sifra);
         this.naziv = naziv;
         this.mjesto = mjesto;
         this.brojclanova = brojclanova;
         this.registracija = registracija;
-        this.motoDogadaji = motoDogadaji;
+        this.motoDogadjaji = motoDogadjaji;
     }
     
     public String getNaziv() {
@@ -69,12 +69,12 @@ public class MotoKlub extends Entitet{
         this.registracija = registracija;
     }
     
-    public List<MotoDogadaj> getMotoDogadaji() {
-        return motoDogadaji;
+    public List<MotoDogadjaj> getMotoDogadjaji() {
+        return motoDogadjaji;
     }
 
-    public void setMotoDogadaji(List<MotoDogadaj> motoDogadaji) {
-        this.motoDogadaji = motoDogadaji;
+    public void setMotoDogadaji(List<MotoDogadjaj> motoDogadjaji) {
+        this.motoDogadjaji = motoDogadjaji;
     }
     
     @Override
