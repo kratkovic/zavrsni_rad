@@ -76,16 +76,16 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
 }
 
     private void kontrolaNazivDupliUBazi()throws MotoVodicException{
-        MotoKlub mk=null;
+        List<MotoKlub> motoklubovi=null;
         try {
-            mk = session.createQuery("from MotoKlub mk " 
+            motoklubovi = session.createQuery("from MotoKlub mk " 
                     + " where mk.naziv=:naziv",
                     MotoKlub.class)
                     .setParameter("naziv", entitet.getNaziv())
-                    .getSingleResult();
+                    .list();
         } catch (Exception e) {
         }
-        if(mk!=null){
+        if(motoklubovi!=null && !motoklubovi.isEmpty()){
             throw new MotoVodicException("Motoklub s istim nazivom postoji u bazi");
         }
     }

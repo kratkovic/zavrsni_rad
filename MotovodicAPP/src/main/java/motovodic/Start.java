@@ -19,7 +19,7 @@ public class Start {
         ObradaMotoKlub omk = new ObradaMotoKlub();
         
         MotoKlub motoklub = new MotoKlub();
-        motoklub.setNaziv("ab");
+        motoklub.setNaziv("Prvi preko kontrolera");
         omk.setEntitet(motoklub);
         
         try {
