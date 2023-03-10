@@ -22,11 +22,16 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
 
     @Override
     protected void kontrolaPromjena() throws MotoVodicException {
-
+        kontrolaNazivNull();
+        kontrolaNazivNijeBroj();
+        kontrolaNazivMinimalnaDuzina();
+        kontrolaNazivMaksimalnaDuzina();
+        kontrolaNazivDupliUBazi();
     }
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
+        
 
     }
 
@@ -36,7 +41,6 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
         kontrolaNazivDupliUBazi();
-        
 
     }
 
@@ -62,30 +66,30 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
     }
 
     private void kontrolaNazivMinimalnaDuzina() throws MotoVodicException {
-    if(entitet.getNaziv().trim().length()<3){
-        throw new MotoVodicException("Naziv motokluba mora imati minimalno 3 znaka");
-    }
-    
-    }
+        if (entitet.getNaziv().trim().length() < 3) {
+            throw new MotoVodicException("Naziv motokluba mora imati minimalno 3 znaka");
+        }
 
-    private void kontrolaNazivMaksimalnaDuzina() throws MotoVodicException{
-       if(entitet.getNaziv().trim().length()>50){
-        throw new MotoVodicException("Naziv motokluba može imati minimalno 50 znakova");
     }
 
-}
+    private void kontrolaNazivMaksimalnaDuzina() throws MotoVodicException {
+        if (entitet.getNaziv().trim().length() > 50) {
+            throw new MotoVodicException("Naziv motokluba može imati minimalno 50 znakova");
+        }
 
-    private void kontrolaNazivDupliUBazi()throws MotoVodicException{
-        List<MotoKlub> motoklubovi=null;
+    }
+
+    private void kontrolaNazivDupliUBazi() throws MotoVodicException {
+        List<MotoKlub> motoklubovi = null;
         try {
-            motoklubovi = session.createQuery("from MotoKlub mk " 
+            motoklubovi = session.createQuery("from MotoKlub mk "
                     + " where mk.naziv=:naziv",
                     MotoKlub.class)
                     .setParameter("naziv", entitet.getNaziv())
                     .list();
         } catch (Exception e) {
         }
-        if(motoklubovi!=null && !motoklubovi.isEmpty()){
+        if (motoklubovi != null && !motoklubovi.isEmpty()) {
             throw new MotoVodicException("Motoklub s istim nazivom postoji u bazi");
         }
     }

@@ -10,30 +10,17 @@ import motovodic.controller.ObradaMotoKlub;
 import motovodic.model.MotoKlub;
 import motovodic.util.HibernateUtil;
 import motovodic.util.MotoVodicException;
+import motovodic.view.SplashScreen;
 
 
 
 public class Start {
 
     public static void main(String[] args) {
-        ObradaMotoKlub omk = new ObradaMotoKlub();
-        
-        MotoKlub motoklub = new MotoKlub();
-        motoklub.setNaziv("Prvi preko kontrolera");
-        omk.setEntitet(motoklub);
-        
-        try {
-            omk.create();
-        } catch (MotoVodicException e) {
-            System.out.println(e.getPoruka());
-        }
-        
-        
-        for(MotoKlub mk : omk.read()){
-            System.out.println(mk.getNaziv());
+      new SplashScreen().setVisible(true);
             
         }
        
        
     }
-}
+
