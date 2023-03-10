@@ -35,6 +35,8 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
         kontrolaNazivNijeBroj();
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
+        kontrolaNazivDupliUBazi();
+        
 
     }
 
@@ -72,4 +74,19 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
     }
 
 }
+
+    private void kontrolaNazivDupliUBazi()throws MotoVodicException{
+        MotoKlub mk=null;
+        try {
+            mk = session.createQuery("from MotoKlub mk " 
+                    + " where mk.naziv=:naziv",
+                    MotoKlub.class)
+                    .setParameter("naziv", entitet.getNaziv())
+                    .getSingleResult();
+        } catch (Exception e) {
+        }
+        if(mk!=null){
+            throw new MotoVodicException("Motoklub s istim nazivom postoji u bazi");
+        }
+    }
 }
