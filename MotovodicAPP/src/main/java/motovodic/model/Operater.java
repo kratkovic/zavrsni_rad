@@ -7,5 +7,7 @@ package motovodic.model;
 
 public class Operater {
     
+    private char[] lozinka;
+    
     
 }
