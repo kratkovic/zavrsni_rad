@@ -4,6 +4,7 @@
 
 drop database if exists motovodic;
 create database motovodic;
+
 use motovodic;
 create table motoklub(
     sifra int not null primary key auto_increment,

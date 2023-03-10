@@ -4,10 +4,7 @@
  */
 package motovodic.util;
 
-/**
- *
- * @author Kiki
- */
+
 public class Alati {
     
 }
