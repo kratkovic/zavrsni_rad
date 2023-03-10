@@ -4,10 +4,8 @@
  */
 package motovodic.model;
 
-/**
- *
- * @author Kiki
- */
+
 public class Operater {
+    
     
 }
