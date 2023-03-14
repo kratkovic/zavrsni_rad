@@ -19,6 +19,11 @@ public class Servis extends Entitet{
     @OneToMany
     @JoinColumn(name = "servis")
     private List<Smjestaj> smjestaji;
+    
+    
+     public Servis() {
+       super();
+    }
 
     public Servis(String naziv, String mjesto, String radnovrijeme, List<Smjestaj> smjestaji, int sifra) {
         super(sifra);
@@ -28,6 +33,7 @@ public class Servis extends Entitet{
         this.smjestaji = smjestaji;
     }
 
+   
     public String getNaziv() {
         return naziv;
     }
