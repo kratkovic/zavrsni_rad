@@ -8,6 +8,7 @@ import com.github.javafaker.Faker;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import motovodic.model.MotoDogadjaj;
 import motovodic.model.MotoKlub;
 import motovodic.model.Servis;
@@ -87,8 +88,15 @@ public class PocetniInsert {
        Servis sr;
        for(int i = 0; i<BROJ_SERVISA; i++){
            sr = new Servis();
-         
+         sr.setNaziv(faker.app().name());
+         sr.setMjesto(faker.address().fullAddress());
+         sr.setRadnovrijeme(faker.app().name());
+         session.persist(sr);
+         servisi.add(sr);
        }
     }
     
+    private int sb(int min, int max){
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
+    }
 }
