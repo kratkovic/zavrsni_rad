@@ -4,11 +4,13 @@
  */
 package motovodic.util;
 
+import motovodic.model.Operater;
+
 
 public class Aplikacija {
     
     public static final String NAZIV_APP="MotoVodic APP";
-    
+    public static Operater OPERATER;
     
     
 }
