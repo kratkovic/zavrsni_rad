@@ -5,7 +5,7 @@
 package motovodic.model;
 
 
-public class Operater {
+public class Operater extends Entitet{
     
     private char[] lozinka;
     
