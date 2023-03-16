@@ -66,7 +66,7 @@ public class ProzorLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Username");
+        jLabel1.setText("Korisničko Ime");
 
         txtUserName.setText("Admin");
         txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
