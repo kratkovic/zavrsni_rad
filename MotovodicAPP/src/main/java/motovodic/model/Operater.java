@@ -9,36 +9,10 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Operater extends Entitet{
-    
-    private String ime;
-    private String prezime;
-    private String email;
-    @Column(columnDefinition = "char(61)")
+    private String username;
+   @Column(columnDefinition = "char(61)")
     private char[] lozinka;
     
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public char[] getLozinka() {
         return lozinka;
@@ -48,8 +22,16 @@ public class Operater extends Entitet{
         this.lozinka = lozinka;
     }
 
-    public String getImePrezime(){
-        return getIme() + " " + getPrezime();
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
     
+
+   
 }
+
+    

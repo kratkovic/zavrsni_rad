@@ -5,6 +5,7 @@
 package motovodic.view;
 
 import javax.swing.JOptionPane;
+import motovodic.controller.ObradaOperater;
 import motovodic.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -72,6 +73,11 @@ public class SplashScreen extends javax.swing.JFrame {
         public void run() {
             Session s = HibernateUtil.getSession();
             if(!s.getMetamodel().getEntities().isEmpty()){
+                ObradaOperater op = new ObradaOperater();
+                if(op.read().isEmpty()){
+                    op.UnosAdminOperatera();
+                    
+                }
                 new ProzorLogin().setVisible(true);
                 dispose();
             }else{
