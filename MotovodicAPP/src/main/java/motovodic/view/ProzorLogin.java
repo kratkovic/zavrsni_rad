@@ -20,32 +20,36 @@ public class ProzorLogin extends javax.swing.JFrame {
     /**
      * Creates new form ProzorScreen
      */
-    public ProzorLogin() {
+ public ProzorLogin() {
         initComponents();
         obrada = new ObradaOperater();
         setTitle(Aplikacija.NAZIV_APP + " Login");
     }
-    
-    private void autoriziraj(){
+
+    private void autoriziraj() {
         lblPoruka.setText("");
-        if(txtEmail.getText().isEmpty()){
+        if (txtEmail.getText().isEmpty()) {
             lblPoruka.setText("Obavezno email");
             return;
         }
-        if(pswLozinka.getPassword().length==0){
+
+        if (pswLozinka.getPassword().length == 0) {
             lblPoruka.setText("Obavezno lozinka");
             return;
         }
-        
-        Operater o = obrada.Autoriziraj(txtEmail.getText(), 
+
+        Operater o = obrada.autoriziraj(txtEmail.getText(),
                 pswLozinka.getPassword());
-        
-        if(o==null){
+
+        if (o == null) {
             lblPoruka.setText("Neispravna kombinacija email i lozinka");
             return;
         }
+        Aplikacija.OPERATER=o;
+
         new ProzorIzbornik().setVisible(true);
         dispose();
+
     }
 
     /**
@@ -139,23 +143,24 @@ public class ProzorLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAutorizirajActionPerformed
 
     private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
-       lblPoruka.setText("");
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-           if(txtEmail.getText().isEmpty()){
-               lblPoruka.setText("Obavezno email");
-               return;
-           }
-           if(pswLozinka.getPassword().length==0){
-               pswLozinka.requestFocus();
-               lblPoruka.setText("Obavezno lozinka");
-               return;
-           }
-           autoriziraj();
-       }
+        lblPoruka.setText("");
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtEmail.getText().isEmpty()) {
+                lblPoruka.setText("Obavezno email");
+                return;
+            }
+
+            if (pswLozinka.getPassword().length == 0) {
+                pswLozinka.requestFocus();
+                lblPoruka.setText("Obavezno lozinka");
+                return;
+            }
+            autoriziraj();
+        }
     }//GEN-LAST:event_txtEmailKeyPressed
 
     private void pswLozinkaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswLozinkaKeyPressed
-       lblPoruka.setText("");
+      lblPoruka.setText("");
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (pswLozinka.getPassword().length == 0) {
                 lblPoruka.setText("Obavezno lozinka");
