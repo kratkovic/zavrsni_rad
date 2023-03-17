@@ -6,9 +6,10 @@ package motovodic.controller;
 
 import jakarta.persistence.NoResultException;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 import motovodic.model.Operater;
 import motovodic.util.MotoVodicException;
-import org.mindrot.jbcrypt.BCrypt;
+
 
 public class ObradaOperater extends Obrada<Operater> {
 
@@ -19,8 +20,11 @@ public class ObradaOperater extends Obrada<Operater> {
     }
 
     public void unosAdminOperatera() {
+
         Operater o = new Operater();
-        o.setKorisnickoime("Admin");
+        o.setIme("Kristijan");
+        o.setPrezime("Ratković");
+        o.setEmail("ratkovic.kristijan@gmail.com");
         o.setLozinka(BCrypt.hashpw("Motovodic23",
                 BCrypt.gensalt()).toCharArray());
 
@@ -29,15 +33,14 @@ public class ObradaOperater extends Obrada<Operater> {
             create();
         } catch (MotoVodicException ex) {
 
-            
         }
     }
-        public Operater Autoriziraj(String korisnickoime, char[] lozinka) {
+         public Operater Autoriziraj(String email, char[] lozinka) {
         Operater o;
         try {
-            o = session.createQuery("from Operater o where o.korisnickoime=:korisnickoime",
+            o = session.createQuery("from Operater o where o.email=:email",
                     Operater.class)
-                    .setParameter("korisnickoime", korisnickoime)
+                    .setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -51,19 +54,24 @@ public class ObradaOperater extends Obrada<Operater> {
         return null;
     }
 
+    
+    
+    
+    
+    
     @Override
     protected void kontrolaUnos() throws MotoVodicException {
-
+      
     }
 
     @Override
     protected void kontrolaPromjena() throws MotoVodicException {
-
+       
     }
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
-
+       
     }
-
+    
 }
