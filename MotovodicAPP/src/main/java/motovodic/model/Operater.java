@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Operater extends Entitet{
-    private String username;
+    private String korisnickoime;
    @Column(columnDefinition = "char(61)")
     private char[] lozinka;
     
@@ -22,13 +22,15 @@ public class Operater extends Entitet{
         this.lozinka = lozinka;
     }
 
-    public String getUsername() {
-        return username;
+    public String getKorisnickoime() {
+        return korisnickoime;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setKorisnickoime(String korisnickoime) {
+        this.korisnickoime = korisnickoime;
     }
+
+   
     
 
    

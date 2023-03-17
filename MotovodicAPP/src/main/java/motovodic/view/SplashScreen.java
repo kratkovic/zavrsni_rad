@@ -75,7 +75,7 @@ public class SplashScreen extends javax.swing.JFrame {
             if(!s.getMetamodel().getEntities().isEmpty()){
                 ObradaOperater op = new ObradaOperater();
                 if(op.read().isEmpty()){
-                    op.UnosAdminOperatera();
+                    op.unosAdminOperatera();
                     
                 }
                 new ProzorLogin().setVisible(true);

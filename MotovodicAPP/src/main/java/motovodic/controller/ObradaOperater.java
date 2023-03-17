@@ -4,50 +4,50 @@
  */
 package motovodic.controller;
 
+import jakarta.persistence.NoResultException;
 import java.util.List;
 import motovodic.model.Operater;
 import motovodic.util.MotoVodicException;
 import org.mindrot.jbcrypt.BCrypt;
 
-/**
- *
- * @author Kiki
- */
 public class ObradaOperater extends Obrada<Operater> {
 
     @Override
     public List<Operater> read() {
+
         return session.createQuery("from Operater", Operater.class).list();
     }
 
-    public void UnosAdminOperatera() {
+    public void unosAdminOperatera() {
         Operater o = new Operater();
-        o.setUsername("Admin");
-        o.setLozinka(BCrypt.hashpw("Motovodic23", BCrypt.gensalt()).toCharArray());
+        o.setKorisnickoime("Admin");
+        o.setLozinka(BCrypt.hashpw("Motovodic23",
+                BCrypt.gensalt()).toCharArray());
 
         entitet = o;
         try {
             create();
         } catch (MotoVodicException ex) {
-            System.out.println(ex.getPoruka());
+
+            
         }
-
     }
-
-    public Operater Autoriziraj(String username, char[] lozinka) {
-        Operater o ;
+        public Operater Autoriziraj(String korisnickoime, char[] lozinka) {
+        Operater o;
         try {
-            o = session.createQuery("from Operater o where username=:username ", Operater.class)
-                    .setParameter("username", username)
+            o = session.createQuery("from Operater o where o.korisnickoime=:korisnickoime",
+                    Operater.class)
+                    .setParameter("korisnickoime", korisnickoime)
                     .getSingleResult();
-
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             return null;
         }
 
-        if (BCrypt.checkpw(new String(lozinka), new String(o.getLozinka()))) {
+        if (BCrypt.checkpw(new String(lozinka),
+                new String(o.getLozinka()))) {
             return o;
         }
+
         return null;
     }
 

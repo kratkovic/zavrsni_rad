@@ -29,7 +29,7 @@ public class ProzorLogin extends javax.swing.JFrame {
     private void autoriziraj(){
         lblPoruka.setText("");
         if(txtUserName.getText().isEmpty()){
-            lblPoruka.setText("Obavezno username");
+            lblPoruka.setText("Obavezno korisnickoime");
             return;
         }
         if(pswLozinka.getPassword().length==0){
@@ -41,7 +41,7 @@ public class ProzorLogin extends javax.swing.JFrame {
                 pswLozinka.getPassword());
         
         if(o==null){
-            lblPoruka.setText("Neispravna kombinacija username i lozinka");
+            lblPoruka.setText("Neispravna kombinacija korisnickoime i lozinka");
             return;
         }
         new ProzorIzbornik().setVisible(true);
@@ -66,7 +66,7 @@ public class ProzorLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Korisničko Ime");
+        jLabel1.setText("Korisničko ime");
 
         txtUserName.setText("Admin");
         txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -142,7 +142,7 @@ public class ProzorLogin extends javax.swing.JFrame {
        lblPoruka.setText("");
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
            if(txtUserName.getText().isEmpty()){
-               lblPoruka.setText("Obavezno username");
+               lblPoruka.setText("Obavezno korisnickoime");
                return;
            }
            if(pswLozinka.getPassword().length==0){
@@ -163,7 +163,7 @@ public class ProzorLogin extends javax.swing.JFrame {
             }
 
             if (txtUserName.getText().isEmpty()) {
-                lblPoruka.setText("Obavezno email");
+                lblPoruka.setText("Obavezno korisnickoime");
                 txtUserName.requestFocus();
                 return;
             }
