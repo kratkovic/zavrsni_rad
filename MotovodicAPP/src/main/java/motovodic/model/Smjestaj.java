@@ -18,18 +18,33 @@ public class Smjestaj extends Entitet{
     @ManyToOne
     @JoinColumn(name = "motodogadjaj")
     private MotoDogadjaj motoDogadjaj;
+    
+     @ManyToOne
+    @JoinColumn(name = "servis")
+    private Servis servis;
 
     public Smjestaj() {
         super();
     }
 
-    public Smjestaj(String naziv, String vrsta, BigDecimal cijena, MotoDogadjaj motoDogadjaj, int sifra) {
+    public Smjestaj(String naziv, String vrsta, BigDecimal cijena, MotoDogadjaj motoDogadjaj, Servis servis, int sifra) {
         super(sifra);
         this.naziv = naziv;
         this.vrsta = vrsta;
         this.cijena = cijena;
         this.motoDogadjaj = motoDogadjaj;
+        this.servis = servis;
     }
+
+    public Servis getServis() {
+        return servis;
+    }
+
+    public void setServis(Servis servis) {
+        this.servis = servis;
+    }
+
+  
     
    
     

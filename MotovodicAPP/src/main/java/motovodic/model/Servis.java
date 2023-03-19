@@ -16,10 +16,6 @@ public class Servis extends Entitet{
     private String mjesto;
     private String radnovrijeme;
     
-    @OneToMany
-    @JoinColumn(name = "servis")
-    private List<Smjestaj> smjestaji;
-    
     
      public Servis() {
        super();
@@ -30,7 +26,6 @@ public class Servis extends Entitet{
         this.naziv = naziv;
         this.mjesto = mjesto;
         this.radnovrijeme = radnovrijeme;
-        this.smjestaji = smjestaji;
     }
 
    
@@ -56,14 +51,6 @@ public class Servis extends Entitet{
 
     public void setRadnovrijeme(String radnovrijeme) {
         this.radnovrijeme = radnovrijeme;
-    }
-
-    public List<Smjestaj> getSmjestaji() {
-        return smjestaji;
-    }
-
-    public void setSmjestaji(List<Smjestaj> smjestaji) {
-        this.smjestaji = smjestaji;
     }
 
    @Override

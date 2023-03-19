@@ -40,8 +40,9 @@ public class PocetniInsert {
         session.beginTransaction();
         kreirajMotoKlubove();
         kreirajMotoDogadjaje();
-        kreirajSmjestaje();
         kreirajServise();
+        kreirajSmjestaje();
+        
         session.getTransaction().commit();
     }
     
@@ -62,6 +63,7 @@ public class PocetniInsert {
        MotoDogadjaj md;
        for(int i = 0; i <BROJ_MOTODOGADJAJA; i++){
            md = new MotoDogadjaj();
+           md.setMotoklub(motoklubovi.get(sb(0,motoklubovi.size()-1)));
            md.setNaziv(faker.app().name());
            md.setDatumpocetka(faker.date().birthday(1, 12));
            md.setMjestoodrzavanja(faker.app().name());
@@ -78,6 +80,8 @@ public class PocetniInsert {
            s = new Smjestaj();
            s.setNaziv(faker.app().name());
            s.setVrsta(faker.app().name());
+           s.setMotoDogadjaj(motodogadaji.get(sb(0,motodogadaji.size()-1)));
+           s.setServis(servisi.get(sb(0,servisi.size()-1)));
            s.setCijena(new BigDecimal(faker.number().numberBetween(5, 200)));
            session.persist(s);
            smjestaji.add(s);
