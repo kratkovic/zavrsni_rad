@@ -62,15 +62,15 @@ VALUES ('Mega bikers susreti', 'Poloj', 'Mario Karakaš', '2023-05-12 17:00:00',
 ('Osječki moto susreti', 'Tvrđa', 'Zdravko Bošnjak', '2023-06-25 17:00:00', 2),
 ('Moto party MK Vukovar', 'Dunavska šetnica Vukovar', 'Kristijan Komšić', '2023-06-27 17:00:00', 3);
 
-insert into smjestaj(naziv,vrsta,cijena, motodogadjaj)
-values ('Guesthouse Coco', 'Hostel', 200.1, 1),
-('Guest House Talas', 'Apartmani', 262.2, 2 ),
-('Vila Rosa', 'Hostel', 360.1, 3);
+insert into smjestaj(naziv,vrsta,cijena, motodogadjaj, servis)
+values ('Guesthouse Coco', 'Hostel', 200.1, 1,1),
+('Guest House Talas', 'Apartmani', 262.2, 2,2),
+('Vila Rosa', 'Hostel', 360.1, 3,3);
 
-insert into servis(naziv,mjesto,radnovrijeme, smjestaj)
-values ('Big Bike', 'Slavonski Brod', '09_17h', 1),
-('Moto silver', 'Osijek', '09_17h', 2),
-('Docdyno tuning', 'Vinkovci', '08_16h', 3);
+insert into servis(naziv,mjesto,radnovrijeme)
+values ('Big Bike', 'Slavonski Brod', '09-17h'),
+('Moto silver', 'Osijek', '09-17h'),
+('Docdyno tuning', 'Vinkovci', '08-16h');
 
 
 

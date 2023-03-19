@@ -10,15 +10,17 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Servis extends Entitet{
-    
+public class Servis extends Entitet {
+
     private String naziv;
     private String mjesto;
     private String radnovrijeme;
-    
-    
-     public Servis() {
-       super();
+
+    @OneToMany(mappedBy = "servis")
+    private List<Smjestaj> smjestaji;
+
+    public Servis() {
+        super();
     }
 
     public Servis(String naziv, String mjesto, String radnovrijeme, List<Smjestaj> smjestaji, int sifra) {
@@ -28,7 +30,6 @@ public class Servis extends Entitet{
         this.radnovrijeme = radnovrijeme;
     }
 
-   
     public String getNaziv() {
         return naziv;
     }
@@ -53,11 +54,9 @@ public class Servis extends Entitet{
         this.radnovrijeme = radnovrijeme;
     }
 
-   @Override
+    @Override
     public String toString() {
         return naziv + " " + mjesto;
     }
-    
-}
 
- 
+}
