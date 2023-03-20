@@ -40,7 +40,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\temp\240c950f-1e5b-4f04-b512-7e8e26fd245b.jpeg"/>
+          <Image iconType="2" name="C:\Users\Kiki\Documents\zavrsni_rad\MotovodicAPP\src\main\resources\biking-motorcycle-forest.jpg"/>
         </Property>
       </Properties>
     </Component>
