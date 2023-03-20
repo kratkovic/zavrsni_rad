@@ -4,6 +4,7 @@
  */
 package motovodic.view;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,11 +33,17 @@ public class ProzorIzbornik extends javax.swing.JFrame {
          new Vrijeme().start();
     }
     private class Vrijeme extends Thread{
+        
+        private SimpleDateFormat df;
+        
+        public Vrijeme(){
+            df = new SimpleDateFormat("dd.MM.YYYY. hh:mm:ss");
+        }
 
         @Override
         public void run() {
             while(true){
-            lblVrijeme.setText(new Date().toString());
+            lblVrijeme.setText(df.format(new Date()));
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
