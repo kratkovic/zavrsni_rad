@@ -30,6 +30,7 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
         kontrolaNazivDupliUBazi();
+        kontrolaCijena();
     }
 
     @Override
