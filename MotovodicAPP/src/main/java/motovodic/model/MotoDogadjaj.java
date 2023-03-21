@@ -80,7 +80,10 @@ public class MotoDogadjaj extends Entitet {
     public void setMotoklub(MotoKlub motoklub) {
         this.motoklub = motoklub;
     }
-
+@Override
+    public String toString() {
+        return naziv + " " + mjestoodrzavanja;
+    }
    
     }
 
