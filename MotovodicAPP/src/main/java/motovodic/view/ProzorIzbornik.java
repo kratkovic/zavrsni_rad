@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import motovodic.util.Aplikacija;
 
@@ -22,36 +23,37 @@ public class ProzorIzbornik extends javax.swing.JFrame {
      */
     public ProzorIzbornik() {
         initComponents();
-        setTitle(Aplikacija.NAZIV_APP + ": " + 
-                Aplikacija.OPERATER.getImePrezime());
-      
-       pokreniSat();
-                
+        setTitle(Aplikacija.NAZIV_APP + ": "
+                + Aplikacija.OPERATER.getImePrezime());
+
+        pokreniSat();
+
     }
-    
-    private void pokreniSat(){
-         new Vrijeme().start();
+
+    private void pokreniSat() {
+        new Vrijeme().start();
     }
-    private class Vrijeme extends Thread{
-        
+
+    private class Vrijeme extends Thread {
+
         private SimpleDateFormat df;
-        
-        public Vrijeme(){
+
+        public Vrijeme() {
             df = new SimpleDateFormat("dd.MM.YYYY. hh:mm:ss");
         }
 
         @Override
         public void run() {
-            while(true){
-            lblVrijeme.setText(df.format(new Date()));
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-               
+            while (true) {
+                lblVrijeme.setText(df.format(new Date()));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+
+                }
             }
         }
-        }
-        
+
     }
 
     /**
@@ -154,20 +156,17 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-       
+
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-       JOptionPane.showMessageDialog(getRootPane(), 
-               "Aplikacija za moto sezonu", "O aplikaciji", 
-               JOptionPane.INFORMATION_MESSAGE);
+        ImageIcon icon = new ImageIcon("src/motor.png");
+        JOptionPane.showMessageDialog(getRootPane(), "Aplikacija za moto sezonu", "O aplikaciji", JOptionPane.PLAIN_MESSAGE, icon);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
