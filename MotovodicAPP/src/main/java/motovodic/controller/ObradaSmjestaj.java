@@ -4,6 +4,7 @@
  */
 package motovodic.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import motovodic.model.Smjestaj;
 import motovodic.util.MotoVodicException;
@@ -19,6 +20,7 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     @Override
     protected void kontrolaUnos() throws MotoVodicException {
         kontrolaNaziv();
+        kontrolaCijena();
     }
 
     @Override
@@ -88,6 +90,16 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
         if (smjestaji != null && !smjestaji.isEmpty()) {
             throw new MotoVodicException("Smještaj s istim nazivom postoji u bazi");
         }
+    }
+
+    private void kontrolaCijena() throws MotoVodicException{
+         if(entitet.getCijena()==null ||
+                entitet.getCijena().compareTo(BigDecimal.ZERO)<=0 ||
+                entitet.getCijena().compareTo(new BigDecimal(10000))==1){
+            throw new MotoVodicException("Cijena mora biti postavljena, "
+                    + "veća od 0 i manja od 10000");
+        }
+        
     }
       
     }
