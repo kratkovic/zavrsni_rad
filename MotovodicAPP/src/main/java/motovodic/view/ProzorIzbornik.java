@@ -39,7 +39,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         private SimpleDateFormat df;
 
         public Vrijeme() {
-            df = new SimpleDateFormat("dd.MM.YYYY. hh:mm:ss");
+            df = new SimpleDateFormat("dd.MM.YYYY. HH:mm:ss");
         }
 
         @Override
