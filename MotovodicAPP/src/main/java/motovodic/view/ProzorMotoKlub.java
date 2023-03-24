@@ -4,10 +4,14 @@
  */
 package motovodic.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import motovodic.controller.ObradaMotoKlub;
 import motovodic.model.MotoKlub;
 import motovodic.util.Aplikacija;
+import motovodic.util.MotoVodicException;
 
 /**
  *
@@ -51,7 +55,9 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtMjesto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        chbRegistracija = new javax.swing.JCheckBox();
+        btnDodaj = new javax.swing.JButton();
+        txtBrojClanova = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -69,7 +75,16 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
 
         jLabel3.setText("Broj članova");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(3, 3, 200, 1));
+        chbRegistracija.setText("Registriran");
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        txtBrojClanova.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,14 +94,15 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(txtNaziv)
-                        .addComponent(jLabel2)
-                        .addComponent(txtMjesto, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNaziv)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMjesto)
                     .addComponent(jLabel3)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chbRegistracija)
+                    .addComponent(btnDodaj)
+                    .addComponent(txtBrojClanova, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,7 +121,11 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtBrojClanova, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(chbRegistracija)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDodaj))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -118,6 +138,25 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNazivActionPerformed
 
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+       obrada.setEntitet(new MotoKlub());
+       napuniModel();
+        try {
+            obrada.create();
+        } catch (MotoVodicException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+        
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void napuniModel(){
+        var s = obrada.getEntitet();
+        s.setNaziv(txtNaziv.getText());
+        try {
+            s.setBrojclanova(0);
+        } catch (Exception e) {
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -125,12 +164,14 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JCheckBox chbRegistracija;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JList<MotoKlub> lstPodaci;
+    private javax.swing.JTextField txtBrojClanova;
     private javax.swing.JTextField txtMjesto;
     private javax.swing.JTextField txtNaziv;
     // End of variables declaration//GEN-END:variables

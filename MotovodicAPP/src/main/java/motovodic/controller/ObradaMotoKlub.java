@@ -4,6 +4,7 @@
  */
 package motovodic.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import motovodic.model.MotoKlub;
 import motovodic.util.MotoVodicException;
@@ -18,6 +19,7 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
     @Override
     protected void kontrolaUnos() throws MotoVodicException {
         kontrolaNaziv();
+        kontrolaBrojClanova();
     }
 
     @Override
@@ -27,11 +29,11 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
         kontrolaNazivDupliUBazi();
+        kontrolaBrojClanova();
     }
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
-        
 
     }
 
@@ -91,6 +93,15 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
         }
         if (motoklubovi != null && !motoklubovi.isEmpty()) {
             throw new MotoVodicException("Motoklub s istim nazivom postoji u bazi");
+        }
+    }
+
+    private void kontrolaBrojClanova() throws MotoVodicException {
+        if (entitet.getBrojclanova() == null
+                || entitet.getBrojclanova() <= 0
+                || entitet.getBrojclanova() > 200) {
+            throw new MotoVodicException("Broj članova mora biti postavljen, "
+                    + "veći od 0 i manji od 200");
         }
     }
 }
