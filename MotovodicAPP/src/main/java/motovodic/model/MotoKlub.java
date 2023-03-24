@@ -79,6 +79,6 @@ public class MotoKlub extends Entitet{
     
     @Override
     public String toString() {
-        return naziv + " " + mjesto;
+        return naziv + " " + brojclanova;
     }
 }
