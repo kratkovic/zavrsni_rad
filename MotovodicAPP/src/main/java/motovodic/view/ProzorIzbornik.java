@@ -98,6 +98,11 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jMenu2.setText("Programi");
 
         jMenuItem2.setText("Motoklubovi");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Motodogađaji");
@@ -163,6 +168,10 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("src/motor.png");
         JOptionPane.showMessageDialog(getRootPane(), "Aplikacija za moto sezonu", "O aplikaciji", JOptionPane.PLAIN_MESSAGE, icon);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new ProzorMotoKlub().setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

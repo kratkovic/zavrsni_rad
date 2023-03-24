@@ -12,7 +12,7 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
 
     @Override
     public List<MotoKlub> read() {
-        return session.createQuery("from MotoKlub", MotoKlub.class).list();
+        return session.createQuery("from MotoKlub order by naziv", MotoKlub.class).list();
     }
 
     @Override
