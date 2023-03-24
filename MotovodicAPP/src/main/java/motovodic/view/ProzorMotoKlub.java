@@ -143,6 +143,7 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
        napuniModel();
         try {
             obrada.create();
+            ucitaj();
         } catch (MotoVodicException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
         }
@@ -153,8 +154,9 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
         try {
-            s.setBrojclanova(0);
+            s.setBrojclanova(Integer.parseInt(txtBrojClanova.getText()));
         } catch (Exception e) {
+            s.setBrojclanova( 0);
         }
     }
     /**
