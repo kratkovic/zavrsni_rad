@@ -6,6 +6,7 @@ package motovodic.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import motovodic.model.MotoDogadjaj;
 import motovodic.model.MotoKlub;
 import motovodic.util.MotoVodicException;
 
@@ -34,12 +35,25 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
-         if(entitet.getMotoDogadjaji()!=null && 
-                 !entitet.getMotoDogadjaji().isEmpty()){
-             throw new MotoVodicException(
-             "Moto klub se ne može obrisati " 
-                     + "jer ima moto događaj");
-         } 
+         if(entitet.getMotoDogadjaji()!=null &&
+                !entitet.getMotoDogadjaji().isEmpty()){
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Moto klub ");
+            sb.append(entitet.getNaziv());
+            sb.append(" se ne može obrisati jer ima moto događaje:");
+            sb.append("\n");
+            int b=0;
+            for(MotoDogadjaj g : entitet.getMotoDogadjaji()){
+                sb.append(++b);
+                sb.append(". ");
+                sb.append(g.getNaziv());
+                sb.append("\n");
+            }
+            sb.append("--------");
+            
+            throw new MotoVodicException(sb.toString());
+        }
     }
 
     private void kontrolaNaziv() throws MotoVodicException {

@@ -19,7 +19,7 @@ public class MotoDogadjaj extends Entitet {
     private String mjestoodrzavanja;
     private String odgovorniclan;
     private Date datumpocetka;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "motoklub")
     private MotoKlub motoklub;
     @OneToMany
