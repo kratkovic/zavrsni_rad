@@ -27,18 +27,19 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
     public ProzorMotoKlub() {
         initComponents();
         obrada = new ObradaMotoKlub();
-        setTitle(Aplikacija.NAZIV_APP + ": " + 
-                Aplikacija.OPERATER.getImePrezime() + 
-                ": MotoKlubovi");
+        setTitle(Aplikacija.NAZIV_APP + ": "
+                + Aplikacija.OPERATER.getImePrezime()
+                + ": MotoKlubovi");
         ucitaj();
     }
-
-    private void ucitaj(){
+    
+    private void ucitaj() {
         DefaultListModel<MotoKlub> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
         lstPodaci.repaint();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,9 +59,12 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         chbRegistracija = new javax.swing.JCheckBox();
         btnDodaj = new javax.swing.JButton();
         txtBrojClanova = new javax.swing.JTextField();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstPodaciValueChanged(evt);
@@ -91,6 +95,20 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
 
         txtBrojClanova.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,16 +116,25 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNaziv)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMjesto)
-                    .addComponent(jLabel3)
-                    .addComponent(btnDodaj)
-                    .addComponent(txtBrojClanova, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(chbRegistracija, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(txtNaziv)
+                            .addComponent(jLabel2)
+                            .addComponent(txtMjesto)
+                            .addComponent(jLabel3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPromjeni)
+                                .addGap(13, 13, 13))
+                            .addComponent(txtBrojClanova, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(chbRegistracija, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -130,9 +157,13 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(chbRegistracija)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDodaj))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnObrisi))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,8 +175,8 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNazivActionPerformed
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-       obrada.setEntitet(new MotoKlub());
-       napuniModel();
+        obrada.setEntitet(new MotoKlub());
+        napuniModel();
         try {
             obrada.create();
             ucitaj();
@@ -156,10 +187,10 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
-        if(evt.getValueIsAdjusting()){
+        if (evt.getValueIsAdjusting()) {
             return;
         }
-        if(lstPodaci.getSelectedValue()==null){
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
         
@@ -168,30 +199,70 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
 
-    private void napuniView(){
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite moto klub");
+            return;
+        }
+        napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+          JOptionPane.showMessageDialog(getRootPane()
+                  , ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+       if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite moto klub");
+            return;
+       }
+       try {
+            obrada.delete();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+          JOptionPane.showMessageDialog(getRootPane()
+                  , ex.getPoruka());
+        }
+          
+        
+    }//GEN-LAST:event_btnObrisiActionPerformed
+    
+    private void napuniView() {
         var s = obrada.getEntitet();
         txtNaziv.setText(s.getNaziv());
         txtMjesto.setText(s.getMjesto());
-        txtBrojClanova.setText(String.valueOf(s.getBrojclanova()));
+        try {
+            txtBrojClanova.setText(String.valueOf(s.getBrojclanova()));            
+        } catch (Exception e) {
+            txtBrojClanova.setText("");
+        }
+        
         chbRegistracija.setSelected(s.isRegistracija());
     }
-    private void napuniModel(){
+
+    private void napuniModel() {
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
         try {
             s.setBrojclanova(Integer.parseInt(txtBrojClanova.getText()));
         } catch (Exception e) {
-            s.setBrojclanova( 0);
+            s.setBrojclanova(0);
         }
     }
     /**
      * @param args the command line arguments
      */
-   
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JCheckBox chbRegistracija;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
