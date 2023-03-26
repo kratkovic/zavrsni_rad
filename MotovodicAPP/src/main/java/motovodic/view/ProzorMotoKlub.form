@@ -33,9 +33,9 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <Component id="txtMjesto" max="32767" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chbRegistracija" min="-2" max="-2" attributes="0"/>
                   <Component id="btnDodaj" min="-2" max="-2" attributes="0"/>
                   <Component id="txtBrojClanova" pref="201" max="32767" attributes="0"/>
+                  <Component id="chbRegistracija" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
@@ -84,6 +84,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstPodaciValueChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;MotoKlub&gt;"/>
           </AuxValues>

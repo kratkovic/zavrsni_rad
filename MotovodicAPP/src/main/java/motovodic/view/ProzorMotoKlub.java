@@ -61,6 +61,11 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("Naziv");
@@ -100,9 +105,9 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtMjesto)
                     .addComponent(jLabel3)
-                    .addComponent(chbRegistracija)
                     .addComponent(btnDodaj)
-                    .addComponent(txtBrojClanova, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                    .addComponent(txtBrojClanova, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                    .addComponent(chbRegistracija, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,6 +155,26 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if(evt.getValueIsAdjusting()){
+            return;
+        }
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+        
+        napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void napuniView(){
+        var s = obrada.getEntitet();
+        txtNaziv.setText(s.getNaziv());
+        txtMjesto.setText(s.getMjesto());
+        txtBrojClanova.setText(String.valueOf(s.getBrojclanova()));
+        chbRegistracija.setSelected(s.isRegistracija());
+    }
     private void napuniModel(){
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
