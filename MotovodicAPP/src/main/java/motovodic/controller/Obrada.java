@@ -42,6 +42,9 @@ public abstract class Obrada<T extends Entitet> {
 
     public void delete() throws MotoVodicException {
         kontrolaBrisanje();
+        session.beginTransaction();
+        session.remove(entitet);
+        session.getTransaction().commit();
     }
 
     private void persist() {

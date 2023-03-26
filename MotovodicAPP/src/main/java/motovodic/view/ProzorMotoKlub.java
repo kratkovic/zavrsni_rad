@@ -221,6 +221,14 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
                     "Prvo odaberite moto klub");
             return;
        }
+        if(JOptionPane.showConfirmDialog(
+                getRootPane(),
+                "Sigurno obrisati " + obrada.getEntitet().getNaziv() + "?",
+                "Brisanje",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
        try {
            
             obrada.delete();

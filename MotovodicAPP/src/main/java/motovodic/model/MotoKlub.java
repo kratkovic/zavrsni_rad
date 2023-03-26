@@ -19,8 +19,7 @@ public class MotoKlub extends Entitet{
     private Integer brojclanova;
     private boolean registracija;
     
-    @OneToMany
-    @JoinColumn(name = "motoklub")
+    @OneToMany(mappedBy = "motoklub")
     private List<MotoDogadjaj> motoDogadjaji;
     
     public MotoKlub(){
