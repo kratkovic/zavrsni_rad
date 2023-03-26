@@ -222,6 +222,7 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
             return;
        }
        try {
+           
             obrada.delete();
             ucitaj();
         } catch (MotoVodicException ex) {
