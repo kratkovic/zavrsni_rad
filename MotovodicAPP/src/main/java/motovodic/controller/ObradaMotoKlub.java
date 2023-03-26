@@ -34,7 +34,7 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
-         if(entitet.getMotoDogadjaji()!=null || 
+         if(entitet.getMotoDogadjaji()!=null && 
                  !entitet.getMotoDogadjaji().isEmpty()){
              throw new MotoVodicException(
              "Moto klub se ne može obrisati " 
