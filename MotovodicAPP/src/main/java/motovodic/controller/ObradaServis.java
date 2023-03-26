@@ -19,6 +19,7 @@ public class ObradaServis extends Obrada<Servis>{
     @Override
     protected void kontrolaUnos() throws MotoVodicException {
        kontrolaNaziv();
+       
     }
 
     @Override
@@ -28,6 +29,7 @@ public class ObradaServis extends Obrada<Servis>{
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
         kontrolaNazivDupliUBazi();
+        
     }
 
     @Override
