@@ -4,17 +4,21 @@
  */
 package motovodic.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import motovodic.controller.ObradaServis;
 import motovodic.model.Servis;
 import motovodic.util.Aplikacija;
+import motovodic.util.MotoVodicException;
 
 /**
  *
  * @author Kiki
  */
 public class ProzorServis extends javax.swing.JFrame {
-    
+
     private ObradaServis obrada;
 
     /**
@@ -28,12 +32,13 @@ public class ProzorServis extends javax.swing.JFrame {
                 + ": Servisi");
         ucitaj();
     }
-    private void ucitaj(){
+
+    private void ucitaj() {
         DefaultListModel<Servis> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
         lstPodaci.repaint();
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +51,14 @@ public class ProzorServis extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtNaziv = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtMjesto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtRadnoVrijeme = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,21 +69,73 @@ public class ProzorServis extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstPodaci);
 
+        jLabel1.setText("Naziv");
+
+        jLabel2.setText("Mjesto");
+
+        jLabel3.setText("Radno vijeme ");
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnPromjeni.setText("Promjeni");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNaziv)
+                            .addComponent(txtMjesto, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(txtRadnoVrijeme, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPromjeni)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMjesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRadnoVrijeme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,16 +152,48 @@ public class ProzorServis extends javax.swing.JFrame {
 
         obrada.setEntitet(lstPodaci.getSelectedValue());
 
-       
+       napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
 
+    private void napuniView(){
+        var s = obrada.getEntitet();
+        txtNaziv.setText(s.getNaziv());
+        txtMjesto.setText(s.getMjesto());
+        txtRadnoVrijeme.setText(s.getRadnovrijeme());
+    }
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new Servis());
+        napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void napuniModel() {
+        var s = obrada.getEntitet();
+        s.setNaziv(txtNaziv.getText());
+        s.setMjesto(txtNaziv.getText());
+        s.setRadnovrijeme(txtNaziv.getText());
+    }
     /**
      * @param args the command line arguments
      */
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnPromjeni;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Servis> lstPodaci;
+    private javax.swing.JTextField txtMjesto;
+    private javax.swing.JTextField txtNaziv;
+    private javax.swing.JTextField txtRadnoVrijeme;
     // End of variables declaration//GEN-END:variables
 }

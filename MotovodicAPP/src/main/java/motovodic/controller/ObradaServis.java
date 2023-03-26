@@ -13,7 +13,7 @@ public class ObradaServis extends Obrada<Servis>{
 
     @Override
     public List<Servis> read() {
-     return session.createQuery("from Servis", Servis.class).list();
+     return session.createQuery("from Servis order by naziv", Servis.class).list();
     }
 
     @Override
