@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import motovodic.controller.ObradaServis;
+import motovodic.model.Smjestaj;
 import motovodic.model.Servis;
 import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
@@ -181,6 +182,9 @@ public class ProzorServis extends javax.swing.JFrame {
         txtNaziv.setText(s.getNaziv());
         txtMjesto.setText(s.getMjesto());
         txtRadnoVrijeme.setText(s.getRadnovrijeme());
+        
+        
+       
     }
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         obrada.setEntitet(new Servis());

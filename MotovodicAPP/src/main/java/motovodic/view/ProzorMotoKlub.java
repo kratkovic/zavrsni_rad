@@ -290,7 +290,7 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
         int ukupno=0;
         if(s.getMotoDogadjaji()!=null && !s.getMotoDogadjaji().isEmpty()){
             for(MotoDogadjaj md : s.getMotoDogadjaji()){
-               
+              ukupno++; 
                 m.addElement(md);
             }
         }
