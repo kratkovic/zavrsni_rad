@@ -16,34 +16,47 @@ import motovodic.util.Aplikacija;
  *
  * @author Kiki
  */
-public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicViewSucelje{
-
-    private ObradaMotoDogadjaj obrada;
+public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicViewSucelje {
     
+    private ObradaMotoDogadjaj obrada;
+
     /**
      * Creates new form ProzorMotoDogadjaj
      */
     public ProzorMotoDogadjaj() {
         initComponents();
         obrada = new ObradaMotoDogadjaj();
-         obrada = new ObradaMotoDogadjaj();
+        obrada = new ObradaMotoDogadjaj();
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
                 + ": Moto događaji");
         ucitajFilterMotoKlubovi();
+        ucitajMotoKlubove();
         ucitaj();
-       
+        
     }
     
-    private void ucitajFilterMotoKlubovi(){
-        DefaultComboBoxModel<MotoKlub> m 
+    private void ucitajMotoKlubove() {
+        DefaultComboBoxModel<MotoKlub> m
                 = new DefaultComboBoxModel<>();
-       m.addAll(new ObradaMotoKlub().read());
-       cmbFilterMotoKlubovi.setModel(m);
-       cmbFilterMotoKlubovi.repaint();
-       cmbFilterMotoKlubovi.setSelectedIndex(0);
+        MotoKlub mk = new MotoKlub();
+        mk.setSifra(0);
+        mk.setNaziv("Odaberite moto klub");
+        m.addElement(mk);
+        m.addAll(new ObradaMotoKlub().read());
+        cmbMotoKlubovi.setModel(m);
+        cmbMotoKlubovi.repaint();
+        
     }
     
+    private void ucitajFilterMotoKlubovi() {
+        DefaultComboBoxModel<MotoKlub> m
+                = new DefaultComboBoxModel<>();
+        m.addAll(new ObradaMotoKlub().read());
+        cmbFilterMotoKlubovi.setModel(m);
+        cmbFilterMotoKlubovi.repaint();
+        cmbFilterMotoKlubovi.setSelectedIndex(0);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +70,10 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
         cmbFilterMotoKlubovi = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtNaziv = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cmbMotoKlubovi = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,6 +91,16 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
             }
         });
 
+        jLabel4.setText("Naziv");
+
+        txtNaziv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNazivActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Naziv");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +110,19 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(cmbFilterMotoKlubovi, 0, 205, Short.MAX_VALUE))
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                    .addComponent(cmbMotoKlubovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(239, 239, 239)
+                    .addComponent(jLabel5)
+                    .addContainerGap(285, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,8 +130,20 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                 .addGap(4, 4, 4)
                 .addComponent(cmbFilterMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(14, 14, 14)
+                    .addComponent(jLabel5)
+                    .addContainerGap(270, Short.MAX_VALUE)))
         );
 
         pack();
@@ -106,30 +157,33 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-
+        
         obrada.setEntitet(lstPodaci.getSelectedValue());
-
+        
         napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void cmbFilterMotoKluboviItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilterMotoKluboviItemStateChanged
-       ucitaj();
+        ucitaj();
     }//GEN-LAST:event_cmbFilterMotoKluboviItemStateChanged
 
+    private void txtNazivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNazivActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNazivActionPerformed
+    
     @Override
     public void ucitaj() {
         DefaultListModel<MotoDogadjaj> m = new DefaultListModel<>();
-        m.addAll(obrada.read((MotoKlub)cmbFilterMotoKlubovi.getSelectedItem()));
+        m.addAll(obrada.read((MotoKlub) cmbFilterMotoKlubovi.getSelectedItem()));
         lstPodaci.setModel(m);
         lstPodaci.repaint();
     }
     
-
     @Override
     public void napuniView() {
-       
+        
     }
-
+    
     @Override
     public void napuniModel() {
         
@@ -138,11 +192,14 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<MotoKlub> cmbFilterMotoKlubovi;
+    private javax.swing.JComboBox<MotoKlub> cmbMotoKlubovi;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<MotoDogadjaj> lstPodaci;
+    private javax.swing.JTextField txtNaziv;
     // End of variables declaration//GEN-END:variables
 }
