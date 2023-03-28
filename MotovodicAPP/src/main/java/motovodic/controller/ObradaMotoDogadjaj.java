@@ -6,6 +6,7 @@ package motovodic.controller;
 
 import java.util.List;
 import motovodic.model.MotoDogadjaj;
+import motovodic.model.MotoKlub;
 import motovodic.util.MotoVodicException;
 
 /**
@@ -19,6 +20,14 @@ public class ObradaMotoDogadjaj extends Obrada<MotoDogadjaj> {
         return session.createQuery("from MotoDogadjaj", MotoDogadjaj.class).list();
     }
 
+
+    public List<MotoDogadjaj> read(MotoKlub mk) {
+        return session.createQuery("from MotoDogadjaj " 
+                + " where motoklub=:motoklub" , MotoDogadjaj.class)
+                .setParameter("motoklub", mk)
+                .list();
+    }
+    
     @Override
     protected void kontrolaUnos() throws MotoVodicException {
         kontrolaNaziv();

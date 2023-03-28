@@ -4,18 +4,46 @@
  */
 package motovodic.view;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import motovodic.controller.ObradaMotoDogadjaj;
+import motovodic.controller.ObradaMotoKlub;
+import motovodic.model.MotoDogadjaj;
+import motovodic.model.MotoKlub;
+import motovodic.util.Aplikacija;
+
 /**
  *
  * @author Kiki
  */
 public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicViewSucelje{
 
+    private ObradaMotoDogadjaj obrada;
+    
     /**
      * Creates new form ProzorMotoDogadjaj
      */
     public ProzorMotoDogadjaj() {
         initComponents();
+        obrada = new ObradaMotoDogadjaj();
+         obrada = new ObradaMotoDogadjaj();
+        setTitle(Aplikacija.NAZIV_APP + ": "
+                + Aplikacija.OPERATER.getImePrezime()
+                + ": Moto događaji");
+        ucitajFilterMotoKlubovi();
+        ucitaj();
+       
     }
+    
+    private void ucitajFilterMotoKlubovi(){
+        DefaultComboBoxModel<MotoKlub> m 
+                = new DefaultComboBoxModel<>();
+       m.addAll(new ObradaMotoKlub().read());
+       cmbFilterMotoKlubovi.setModel(m);
+       cmbFilterMotoKlubovi.repaint();
+       cmbFilterMotoKlubovi.setSelectedIndex(0);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,26 +54,76 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstPodaci = new javax.swing.JList<>();
+        cmbFilterMotoKlubovi = new javax.swing.JComboBox<>();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
+
+        cmbFilterMotoKlubovi.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbFilterMotoKluboviItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cmbFilterMotoKlubovi, 0, 205, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(cmbFilterMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+        if (lstPodaci.getSelectedValue() == null) {
+            return;
+        }
+
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+
+        napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void cmbFilterMotoKluboviItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilterMotoKluboviItemStateChanged
+       ucitaj();
+    }//GEN-LAST:event_cmbFilterMotoKluboviItemStateChanged
 
     @Override
     public void ucitaj() {
-       
+        DefaultListModel<MotoDogadjaj> m = new DefaultListModel<>();
+        m.addAll(obrada.read((MotoKlub)cmbFilterMotoKlubovi.getSelectedItem()));
+        lstPodaci.setModel(m);
+        lstPodaci.repaint();
     }
+    
 
     @Override
     public void napuniView() {
@@ -63,5 +141,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<MotoKlub> cmbFilterMotoKlubovi;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<MotoDogadjaj> lstPodaci;
     // End of variables declaration//GEN-END:variables
 }
