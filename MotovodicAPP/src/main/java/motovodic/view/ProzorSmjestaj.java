@@ -4,10 +4,17 @@
  */
 package motovodic.view;
 
+
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import motovodic.controller.ObradaSmjestaj;
 import motovodic.model.Smjestaj;
 import motovodic.util.Aplikacija;
+import motovodic.util.MotoVodicException;
 
 /**
  *
@@ -16,12 +23,16 @@ import motovodic.util.Aplikacija;
 public class ProzorSmjestaj extends javax.swing.JFrame {
 
    private ObradaSmjestaj obrada;
+   private DecimalFormat df;
     /**
      * Creates new form ProzorSmjestaj
      */
     public ProzorSmjestaj() {
         initComponents();
         obrada = new ObradaSmjestaj();
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols
+        (new Locale("hr", "HR"));
+        df = new DecimalFormat("###,##0.00", dfs);
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
                 + ": Smještaji");
@@ -47,10 +58,55 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtNaziv = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtVrsta = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtCijena = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(lstPodaci);
+
+        jLabel4.setText("Naziv");
+
+        txtNaziv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNazivActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Vrsta");
+
+        txtVrsta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVrstaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Cijena");
+
+        txtCijena.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCijena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCijenaActionPerformed(evt);
+            }
+        });
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnPromjeni.setText("Promjeni");
+
+        btnObrisi.setText("Obriši");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,14 +114,54 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtVrsta)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtCijena))
+                                .addGap(11, 11, 11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPromjeni)
+                                .addGap(22, 22, 22))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(btnObrisi)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnObrisi))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -73,12 +169,66 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNazivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNazivActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNazivActionPerformed
+
+    private void txtVrstaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVrstaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVrstaActionPerformed
+
+    private void txtCijenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCijenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCijenaActionPerformed
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new Smjestaj());
+        napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        napuniModel();
+      
+        }
+
+        
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void napuniModel(){
+        var s = obrada.getEntitet();
+        s.setNaziv(txtNaziv.getText());
+        s.setVrsta(txtNaziv.getText());
+        try {
+            s.setCijena(
+                    BigDecimal.valueOf(
+                    df.parse(
+                            txtCijena.getText())
+                            .doubleValue()
+                    )
+            );
+        } catch (Exception e) {
+            s.setCijena(BigDecimal.ZERO);
+    }
+    }
     /**
      * @param args the command line arguments
      */
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Smjestaj> lstPodaci;
+    private javax.swing.JTextField txtCijena;
+    private javax.swing.JTextField txtNaziv;
+    private javax.swing.JTextField txtVrsta;
     // End of variables declaration//GEN-END:variables
+
+   
 }
