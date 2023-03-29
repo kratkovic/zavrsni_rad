@@ -29,7 +29,6 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
         kontrolaNazivNijeBroj();
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
-        kontrolaNazivDupliUBazi();
         kontrolaCijena();
     }
 

@@ -28,7 +28,7 @@ public class ObradaServis extends Obrada<Servis>{
         kontrolaNazivNijeBroj();
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
-        kontrolaNazivDupliUBazi();
+       
         
     }
 

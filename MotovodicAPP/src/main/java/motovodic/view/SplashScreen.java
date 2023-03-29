@@ -38,7 +38,7 @@ public class SplashScreen extends javax.swing.JFrame {
         setUndecorated(true);
         setType(java.awt.Window.Type.POPUP);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kiki\\Documents\\zavrsni_rad\\MotovodicAPP\\src\\main\\resources\\biking-motorcycle-forest.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biking-motorcycle-forest.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -39,7 +39,7 @@ public class ObradaMotoDogadjaj extends Obrada<MotoDogadjaj> {
         kontrolaNazivNijeBroj();
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
-        kontrolaNazivDupliUBazi();
+        
     }
 
     @Override

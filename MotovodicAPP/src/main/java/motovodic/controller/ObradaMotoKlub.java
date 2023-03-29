@@ -29,7 +29,6 @@ public class ObradaMotoKlub extends Obrada<MotoKlub> {
         kontrolaNazivNijeBroj();
         kontrolaNazivMinimalnaDuzina();
         kontrolaNazivMaksimalnaDuzina();
-        kontrolaNazivDupliUBazi();
         kontrolaBrojClanova();
     }
 
