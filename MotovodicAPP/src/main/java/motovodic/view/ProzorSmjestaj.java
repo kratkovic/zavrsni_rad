@@ -8,9 +8,14 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import motovodic.controller.ObradaMotoDogadjaj;
+import motovodic.controller.ObradaServis;
 import motovodic.controller.ObradaSmjestaj;
+import motovodic.model.MotoDogadjaj;
+import motovodic.model.Servis;
 import motovodic.model.Smjestaj;
 import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
@@ -35,9 +40,38 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
                 + ": Smještaji");
+        ucitajMotoDogadjaje();
+        ucitajServise();
         ucitaj();
     }
-
+    
+    private void ucitajMotoDogadjaje(){
+            DefaultComboBoxModel<MotoDogadjaj> m = new DefaultComboBoxModel<>();
+            MotoDogadjaj md = new MotoDogadjaj();
+            md.setSifra(0);
+            md.setNaziv("Odaberite");
+            md.setMjestoodrzavanja("moto događaj");
+            m.addElement(md);
+            m.addAll(new ObradaMotoDogadjaj().read());
+            cmbMotoDogadjaji.setModel(m);
+            cmbMotoDogadjaji.repaint();
+            
+            
+    
+}
+    
+    private void ucitajServise(){
+            DefaultComboBoxModel<Servis> m = new DefaultComboBoxModel<>();
+            Servis s = new Servis();
+            s.setSifra(0);
+            s.setNaziv("Odaberite");
+            s.setMjesto("servis");
+            m.addElement(s);
+            m.addAll(new ObradaServis().read());
+            cmbServisi.setModel(m);
+            cmbServisi.repaint();
+    }
+    
     private void ucitaj() {
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
         m.addAll(obrada.read());
@@ -66,9 +100,14 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cmbMotoDogadjaji = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        cmbServisi = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstPodaciValueChanged(evt);
@@ -122,6 +161,22 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Moto događaj");
+
+        cmbMotoDogadjaji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMotoDogadjajiActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Servis");
+
+        cmbServisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbServisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,26 +186,29 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txtVrsta)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtCijena))
-                                .addGap(11, 11, 11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPromjeni)
-                                .addGap(22, 22, 22))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(btnObrisi)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnPromjeni))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(txtNaziv)
+                            .addComponent(txtVrsta)
+                            .addComponent(txtCijena))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(cmbMotoDogadjaji, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(cmbServisi, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(118, 118, 118))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,14 +216,27 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbMotoDogadjaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbServisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,6 +333,14 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void cmbMotoDogadjajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMotoDogadjajiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMotoDogadjajiActionPerformed
+
+    private void cmbServisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbServisiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbServisiActionPerformed
+
     private void napuniView() {
         var s = obrada.getEntitet();
         txtNaziv.setText(s.getNaziv());
@@ -300,9 +379,13 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JComboBox<MotoDogadjaj> cmbMotoDogadjaji;
+    private javax.swing.JComboBox<Servis> cmbServisi;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Smjestaj> lstPodaci;
     private javax.swing.JTextField txtCijena;
