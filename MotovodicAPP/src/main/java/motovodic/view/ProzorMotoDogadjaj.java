@@ -24,7 +24,7 @@ import motovodic.util.MotoVodicException;
  *
  * @author Kiki
  */
-public class ProzorMotoDogadjaj extends javax.swing.JFrame {
+public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicViewSucelje{
     
     private ObradaMotoDogadjaj obrada;
 
@@ -132,6 +132,12 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Naziv");
+
+        cmbMotoKlubovi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMotoKluboviActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Odgovorni član");
 
@@ -331,17 +337,21 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame {
                      ex.getPoruka());
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
-    
 
-    private void ucitaj() {
+    private void cmbMotoKluboviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMotoKluboviActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMotoKluboviActionPerformed
+    
+    @Override
+    public void ucitaj() {
         DefaultListModel<MotoDogadjaj> m = new DefaultListModel<>();
         m.addAll(obrada.read((MotoKlub) cmbFilterMotoKlubovi.getSelectedItem()));
         lstPodaci.setModel(m);
         lstPodaci.repaint();
     }
     
-    
-    private void napuniView() {
+    @Override
+    public void napuniView() {
        var e = obrada.getEntitet();
        txtNaziv.setText(e.getNaziv());
        txtMjestoOdrzavanja.setText(e.getMjestoodrzavanja());
@@ -360,8 +370,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame {
     }
     
 
-    
-   private void napuniModel() {
+   @Override
+   public void napuniModel() {
         var e = obrada.getEntitet();
         e.setNaziv(txtNaziv.getText());
         e.setMjestoodrzavanja(txtMjestoOdrzavanja.getText());

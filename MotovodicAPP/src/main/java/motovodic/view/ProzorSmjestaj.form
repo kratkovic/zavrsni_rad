@@ -104,6 +104,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstPodaciValueChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Smjestaj&gt;"/>
           </AuxValues>
@@ -155,11 +158,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Promjeni"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromjeniActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnObrisi">
       <Properties>
         <Property name="text" type="java.lang.String" value="Obri&#x161;i"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrisiActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

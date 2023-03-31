@@ -4,7 +4,6 @@
  */
 package motovodic.view;
 
-
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -22,16 +21,16 @@ import motovodic.util.MotoVodicException;
  */
 public class ProzorSmjestaj extends javax.swing.JFrame {
 
-   private ObradaSmjestaj obrada;
-   private DecimalFormat df;
+    private ObradaSmjestaj obrada;
+    private DecimalFormat df;
+
     /**
      * Creates new form ProzorSmjestaj
      */
     public ProzorSmjestaj() {
         initComponents();
         obrada = new ObradaSmjestaj();
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols
-        (new Locale("hr", "HR"));
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols(new Locale("hr", "HR"));
         df = new DecimalFormat("###,##0.00", dfs);
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
@@ -39,14 +38,14 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         ucitaj();
     }
 
-    private void ucitaj(){
+    private void ucitaj() {
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
         lstPodaci.repaint();
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +69,11 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstPodaci);
 
         jLabel4.setText("Naziv");
@@ -105,8 +109,18 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         });
 
         btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,33 +203,99 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             ucitaj();
         } catch (MotoVodicException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
-        napuniModel();
-      
+
         }
 
-        
+
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    private void napuniModel(){
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+        if (lstPodaci.getSelectedValue() == null) {
+            return;
+        }
+
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+
+        napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if (lstPodaci.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite smještaj");
+            return;
+        }
+        napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if (lstPodaci.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite smještaj");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(
+                getRootPane(),
+                "Sigurno obrisati " + obrada.getEntitet().getNaziv() + "?",
+                "Brisanje",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+        try {
+
+            obrada.delete();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void napuniView() {
+        var s = obrada.getEntitet();
+        txtNaziv.setText(s.getNaziv());
+        txtVrsta.setText(s.getVrsta());
+         try {
+            txtCijena.setText(df.format(s.getCijena()));
+        } catch (Exception e) {
+            txtCijena.setText("");
+        }
+         
+   
+    }
+
+    private void napuniModel() {
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
         s.setVrsta(txtNaziv.getText());
         try {
             s.setCijena(
                     BigDecimal.valueOf(
-                    df.parse(
-                            txtCijena.getText())
-                            .doubleValue()
+                            df.parse(
+                                    txtCijena.getText())
+                                    .doubleValue()
                     )
             );
         } catch (Exception e) {
             s.setCijena(BigDecimal.ZERO);
+        }
     }
-    }
+
     /**
      * @param args the command line arguments
      */
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
@@ -230,5 +310,4 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     private javax.swing.JTextField txtVrsta;
     // End of variables declaration//GEN-END:variables
 
-   
 }
