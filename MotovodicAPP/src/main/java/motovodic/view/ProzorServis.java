@@ -177,15 +177,7 @@ public class ProzorServis extends javax.swing.JFrame {
        napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
 
-    private void napuniView(){
-        var s = obrada.getEntitet();
-        txtNaziv.setText(s.getNaziv());
-        txtMjesto.setText(s.getMjesto());
-        txtRadnoVrijeme.setText(s.getRadnovrijeme());
-        
-        
-       
-    }
+   
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         obrada.setEntitet(new Servis());
         napuniModel();
@@ -239,11 +231,23 @@ public class ProzorServis extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+     private void napuniView(){
+        var s = obrada.getEntitet();
+        txtNaziv.setText(s.getNaziv());
+        txtMjesto.setText(s.getMjesto());
+        txtRadnoVrijeme.setText(s.getRadnovrijeme());
+        
+        
+       
+    }
+    
+       
+    
     private void napuniModel() {
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
-        s.setMjesto(txtNaziv.getText());
-        s.setRadnovrijeme(txtNaziv.getText());
+        s.setMjesto(txtMjesto.getText());
+        s.setRadnovrijeme(txtRadnoVrijeme.getText());
     }
     /**
      * @param args the command line arguments

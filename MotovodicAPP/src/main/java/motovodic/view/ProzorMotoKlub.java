@@ -307,6 +307,7 @@ public class ProzorMotoKlub extends javax.swing.JFrame {
     private void napuniModel() {
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
+        s.setMjesto(txtMjesto.getText());
         try {
             s.setBrojclanova(Integer.parseInt(txtBrojClanova.getText()));
         } catch (Exception e) {

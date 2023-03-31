@@ -41,7 +41,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                 = new DefaultComboBoxModel<>();
         MotoKlub mk = new MotoKlub();
         mk.setSifra(0);
-        mk.setNaziv("Odaberite moto klub");
+        mk.setNaziv("Odaberite");
+        mk.setMjesto("moto klub");
         m.addElement(mk);
         m.addAll(new ObradaMotoKlub().read());
         cmbMotoKlubovi.setModel(m);
