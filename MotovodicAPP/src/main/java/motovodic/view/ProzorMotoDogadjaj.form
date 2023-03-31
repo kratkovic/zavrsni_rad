@@ -48,6 +48,8 @@
                   <Component id="txtOdgovorniClan" min="-2" pref="274" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Component id="dpDatumPocetka" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMjestoOdrzavanja" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -73,10 +75,14 @@
                           <Component id="cmbMotoKlubovi" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtMjestoOdrzavanja" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtOdgovorniClan" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="dpDatumPocetka" min="-2" max="-2" attributes="0"/>
@@ -165,6 +171,16 @@
       </Properties>
     </Component>
     <Component class="com.github.lgooddatepicker.components.DatePicker" name="dpDatumPocetka">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mjesto odr&#x17e;avanja"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMjestoOdrzavanja">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMjestoOdrzavanjaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

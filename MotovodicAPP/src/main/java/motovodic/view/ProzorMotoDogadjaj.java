@@ -92,6 +92,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         txtOdgovorniClan = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         dpDatumPocetka = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel7 = new javax.swing.JLabel();
+        txtMjestoOdrzavanja = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,6 +131,14 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
 
         jLabel1.setText("Datum početka");
 
+        jLabel7.setText("Mjesto održavanja");
+
+        txtMjestoOdrzavanja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMjestoOdrzavanjaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,7 +163,9 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                     .addComponent(jLabel6)
                     .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMjestoOdrzavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,10 +185,14 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                             .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMjestoOdrzavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -211,6 +227,10 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private void txtOdgovorniClanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOdgovorniClanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOdgovorniClanActionPerformed
+
+    private void txtMjestoOdrzavanjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMjestoOdrzavanjaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMjestoOdrzavanjaActionPerformed
     
     @Override
     public void ucitaj() {
@@ -224,12 +244,16 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     public void napuniView() {
        var e = obrada.getEntitet();
        txtNaziv.setText(e.getNaziv());
+       txtMjestoOdrzavanja.setText(e.getMjestoodrzavanja());
        txtOdgovorniClan.setText(e.getOdgovorniclan());
        cmbMotoKlubovi.setSelectedItem(e.getMotoklub());
     }
     
     @Override
     public void napuniModel() {
+        var e = obrada.getEntitet();
+        e.setNaziv(txtNaziv.getText());
+        
         
     }
 
@@ -245,8 +269,10 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<MotoDogadjaj> lstPodaci;
+    private javax.swing.JTextField txtMjestoOdrzavanja;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtOdgovorniClan;
     // End of variables declaration//GEN-END:variables
