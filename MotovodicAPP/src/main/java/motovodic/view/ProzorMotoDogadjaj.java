@@ -12,11 +12,13 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import motovodic.controller.ObradaMotoDogadjaj;
 import motovodic.controller.ObradaMotoKlub;
 import motovodic.model.MotoDogadjaj;
 import motovodic.model.MotoKlub;
 import motovodic.util.Aplikacija;
+import motovodic.util.MotoVodicException;
 
 /**
  *
@@ -32,14 +34,18 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     public ProzorMotoDogadjaj() {
         initComponents();
         obrada = new ObradaMotoDogadjaj();
-        obrada = new ObradaMotoDogadjaj();
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
                 + ": Moto događaji");
         definirajDatumPocetka();
+        definirajVrijemePocetka();
         ucitajFilterMotoKlubovi();
         ucitajMotoKlubove();
         ucitaj();
+        
+    }
+    
+    private void definirajVrijemePocetka(){
         
     }
     
@@ -97,6 +103,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         dpDatumPocetka = new com.github.lgooddatepicker.components.DatePicker();
         jLabel7 = new javax.swing.JLabel();
         txtMjestoOdrzavanja = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -142,6 +149,13 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
             }
         });
 
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,13 +177,14 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                     .addComponent(cmbFilterMotoKlubovi, 0, 205, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMjestoOdrzavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap())
+                    .addComponent(btnDodaj))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +196,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                         .addComponent(jLabel5)
                         .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,11 +210,13 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDodaj)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,6 +251,17 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private void txtMjestoOdrzavanjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMjestoOdrzavanjaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMjestoOdrzavanjaActionPerformed
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+       obrada.setEntitet(new MotoDogadjaj());
+        napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (MotoVodicException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
     
     @Override
     public void ucitaj() {
@@ -279,11 +307,16 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         
     }
 
+    
+  
+        
+  
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JComboBox<MotoKlub> cmbFilterMotoKlubovi;
     private javax.swing.JComboBox<MotoKlub> cmbMotoKlubovi;
     private com.github.lgooddatepicker.components.DatePicker dpDatumPocetka;
