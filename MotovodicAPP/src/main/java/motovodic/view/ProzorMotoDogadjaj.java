@@ -5,7 +5,10 @@
 package motovodic.view;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -246,6 +249,16 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
        txtNaziv.setText(e.getNaziv());
        txtMjestoOdrzavanja.setText(e.getMjestoodrzavanja());
        txtOdgovorniClan.setText(e.getOdgovorniclan());
+       if(e.getDatumpocetka()!=null){
+             LocalDate ld = e.getDatumpocetka()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        dpDatumPocetka.setDate(ld);
+        }else{
+            dpDatumPocetka.setDate(null);
+        }
+       
        cmbMotoKlubovi.setSelectedItem(e.getMotoklub());
     }
     
@@ -253,7 +266,16 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     public void napuniModel() {
         var e = obrada.getEntitet();
         e.setNaziv(txtNaziv.getText());
-        
+        e.setMjestoodrzavanja(txtMjestoOdrzavanja.getText());
+        e.setOdgovorniclan(txtOdgovorniClan.getText());
+        e.setDatumpocetka(dpDatumPocetka.getDate()!=null
+                            ? 
+                            Date.from(dpDatumPocetka.getDate()
+                            .atStartOfDay()
+                            .atZone(ZoneId.systemDefault())
+                            .toInstant())
+                            : null);
+    
         
     }
 
