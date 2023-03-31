@@ -278,7 +278,7 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     private void napuniModel() {
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
-        s.setVrsta(txtNaziv.getText());
+        s.setVrsta(txtVrsta.getText());
         try {
             s.setCijena(
                     BigDecimal.valueOf(
