@@ -9,10 +9,7 @@ import motovodic.model.MotoDogadjaj;
 import motovodic.model.MotoKlub;
 import motovodic.util.MotoVodicException;
 
-/**
- *
- * @author Kiki
- */
+
 public class ObradaMotoDogadjaj extends Obrada<MotoDogadjaj> {
 
     @Override
