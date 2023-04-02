@@ -229,6 +229,11 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         });
 
         btnObrisiSmjestaj.setText(">>");
+        btnObrisiSmjestaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiSmjestajActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -444,9 +449,53 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
 
     private void btnDodajSmjestajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajSmjestajActionPerformed
      if(lstSmjestajiUBazi.getSelectedValuesList()==null
-             || lstSmjestajiUBazi.getSelectedValuesList().isEmpty())
+             || lstSmjestajiUBazi.getSelectedValuesList().isEmpty()){
+         JOptionPane.showMessageDialog(getRootPane(), "Prvo pronađite smještaje");
          return;
+     }
+     if(lstSmjestajiNaMotoDogadjaju.getModel()==null || 
+                  !(lstSmjestajiNaMotoDogadjaju.getModel() instanceof DefaultListModel<Smjestaj>)){
+            lstSmjestajiNaMotoDogadjaju.setModel(new DefaultListModel<Smjestaj>());
+        }
+     
+         DefaultListModel<Smjestaj> m = 
+                (DefaultListModel<Smjestaj>) lstSmjestajiNaMotoDogadjaju.getModel();
+        
+        DefaultListModel<Smjestaj> smjestaji = 
+                (DefaultListModel<Smjestaj>) lstSmjestajiNaMotoDogadjaju.getModel();
+        boolean postoji;
+        for(Smjestaj sub : lstSmjestajiUBazi.getSelectedValuesList()){
+            postoji=false;
+            for(int i=0;i<smjestaji.getSize();i++){
+                if(sub.getSifra()==smjestaji.get(i).getSifra()){
+                    postoji=true;
+                    break;
+                }
+            }
+            if(!postoji){
+                 smjestaji.addElement(sub);
+            }
+        }
+        lstSmjestajiNaMotoDogadjaju.repaint();
+         
     }//GEN-LAST:event_btnDodajSmjestajActionPerformed
+
+    private void btnObrisiSmjestajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiSmjestajActionPerformed
+       if(lstSmjestajiNaMotoDogadjaju.getSelectedValuesList()==null
+                || lstSmjestajiNaMotoDogadjaju.getSelectedValuesList().isEmpty()){
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite smještaje na motodogđaju");
+            return;
+        }
+        
+        DefaultListModel<Smjestaj> m = 
+                (DefaultListModel<Smjestaj>) lstSmjestajiNaMotoDogadjaju.getModel();
+        
+        for(Smjestaj s : lstSmjestajiNaMotoDogadjaju.getSelectedValuesList()){
+            m.removeElement(s);
+        }
+        lstSmjestajiNaMotoDogadjaju.repaint();
+    }//GEN-LAST:event_btnObrisiSmjestajActionPerformed
     
     
     private void ucitajSmjestaje(){
