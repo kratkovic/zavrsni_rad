@@ -121,6 +121,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         lstSmjestajiUBazi = new javax.swing.JList<>();
         txtUvjet = new javax.swing.JTextField();
         btnTrazi = new javax.swing.JButton();
+        btnDodajSmjestaj = new javax.swing.JButton();
+        btnObrisiSmjestaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -219,6 +221,15 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
             }
         });
 
+        btnDodajSmjestaj.setText("<<");
+        btnDodajSmjestaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajSmjestajActionPerformed(evt);
+            }
+        });
+
+        btnObrisiSmjestaj.setText(">>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,7 +248,12 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDodajSmjestaj)
+                                    .addComponent(btnObrisiSmjestaj)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -259,7 +275,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                     .addGroup(layout.createSequentialGroup()
                         .addGap(337, 337, 337)
                         .addComponent(btnObrisi)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +329,13 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                             .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTrazi))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addComponent(btnDodajSmjestaj)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnObrisiSmjestaj)))))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -419,10 +441,19 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
        ucitajSmjestaje();
     }//GEN-LAST:event_btnTraziActionPerformed
+
+    private void btnDodajSmjestajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajSmjestajActionPerformed
+     if(lstSmjestajiUBazi.getSelectedValuesList()==null
+             || lstSmjestajiUBazi.getSelectedValuesList().isEmpty())
+         return;
+    }//GEN-LAST:event_btnDodajSmjestajActionPerformed
     
     
     private void ucitajSmjestaje(){
-        
+        DefaultListModel<Smjestaj> m = new DefaultListModel<>();
+       // m.addAll(obradaSmjestaj.read(txtUvjet.getText().trim()));
+        lstSmjestajiUBazi.setModel(m);
+        lstSmjestajiUBazi.repaint();
     }
     @Override
     public void ucitaj() {
@@ -507,7 +538,9 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodajSmjestaj;
     private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnObrisiSmjestaj;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JComboBox<MotoKlub> cmbFilterMotoKlubovi;
