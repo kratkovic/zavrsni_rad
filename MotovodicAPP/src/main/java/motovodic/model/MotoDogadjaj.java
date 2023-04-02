@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class MotoDogadjaj extends Entitet {
 
     public MotoDogadjaj() {
         super();
+        smjestaji = new ArrayList<>();
        
     }
 
@@ -79,6 +81,13 @@ public class MotoDogadjaj extends Entitet {
 
     public void setMotoklub(MotoKlub motoklub) {
         this.motoklub = motoklub;
+    }
+     public List<Smjestaj> getSmjestaji() {
+        return smjestaji;
+    }
+
+    public void setSmjestaji(List<Smjestaj> smjestaji) {
+        this.smjestaji = smjestaji;
     }
 @Override
     public String toString() {

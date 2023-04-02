@@ -21,6 +21,7 @@ public class Servis extends Entitet {
 
     public Servis() {
         super();
+        
     }
 
     public Servis(String naziv, String mjesto, String radnovrijeme, List<Smjestaj> smjestaji, int sifra) {
@@ -53,7 +54,16 @@ public class Servis extends Entitet {
     public void setRadnovrijeme(String radnovrijeme) {
         this.radnovrijeme = radnovrijeme;
     }
+    
+     public List<Smjestaj> getSmjestaji() {
+        return smjestaji;
+    }
 
+    public void setMotoDogadaji(List<MotoDogadjaj> motoDogadjaji) {
+        this.smjestaji = smjestaji;
+    }
+    
+    
     @Override
     public String toString() {
         return naziv + " " + mjesto;

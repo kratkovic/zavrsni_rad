@@ -6,6 +6,7 @@ package motovodic.controller;
 
 import java.util.List;
 import motovodic.model.Servis;
+import motovodic.model.Smjestaj;
 import motovodic.util.MotoVodicException;
 
 
@@ -34,6 +35,26 @@ public class ObradaServis extends Obrada<Servis>{
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
+        if(entitet.getSmjestaji()!=null &&
+                !entitet.getSmjestaji().isEmpty()){
+            
+          StringBuilder sb = new StringBuilder();
+            sb.append("Servis ");
+            sb.append(entitet.getNaziv());
+            sb.append(" se ne može obrisati jer ima smještaje:");
+            sb.append("\n");
+            int b=0;
+            for(Smjestaj g : entitet.getSmjestaji()){
+                sb.append(++b);
+                sb.append(". ");
+                sb.append(g.getNaziv());
+                sb.append("\n");
+            }
+            sb.append("--------");
+            
+            throw new MotoVodicException(sb.toString());  
+        }
+        
         
     }
      private void kontrolaNaziv()throws MotoVodicException{

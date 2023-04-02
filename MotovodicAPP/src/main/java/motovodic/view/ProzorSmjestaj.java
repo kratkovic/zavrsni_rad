@@ -351,6 +351,7 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             txtCijena.setText("");
         }
          
+     
    
     }
 

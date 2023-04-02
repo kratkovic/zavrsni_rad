@@ -8,7 +8,9 @@ import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -17,6 +19,7 @@ import motovodic.controller.ObradaMotoDogadjaj;
 import motovodic.controller.ObradaMotoKlub;
 import motovodic.model.MotoDogadjaj;
 import motovodic.model.MotoKlub;
+import motovodic.model.Smjestaj;
 import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
 
@@ -79,6 +82,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         cmbFilterMotoKlubovi.setModel(m);
         cmbFilterMotoKlubovi.repaint();
         cmbFilterMotoKlubovi.setSelectedIndex(0);
+        
     }
 
     /**
@@ -106,6 +110,9 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstSmjestajiNaMotoDogadjaju = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -178,22 +185,29 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
             }
         });
 
+        jScrollPane2.setViewportView(lstSmjestajiNaMotoDogadjaju);
+
+        jLabel2.setText("Smještaji na moto događaju");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(235, 235, 235)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(102, 102, 102))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -215,7 +229,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                     .addGroup(layout.createSequentialGroup()
                         .addGap(337, 337, 337)
                         .addComponent(btnObrisi)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,32 +239,36 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                     .addComponent(cmbFilterMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMjestoOdrzavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbMotoKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMjestoOdrzavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnDodaj)
+                                    .addComponent(btnPromjeni))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDodaj)
-                            .addComponent(btnPromjeni))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnObrisi)
+                        .addComponent(btnObrisi))
+                    .addComponent(jScrollPane2))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -296,6 +314,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         } catch (MotoVodicException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
         }
+        
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
@@ -352,12 +371,13 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     
     @Override
     public void napuniView() {
-       var e = obrada.getEntitet();
-       txtNaziv.setText(e.getNaziv());
-       txtMjestoOdrzavanja.setText(e.getMjestoodrzavanja());
-       txtOdgovorniClan.setText(e.getOdgovorniclan());
-       if(e.getDatumpocetka()!=null){
-             LocalDate ld = e.getDatumpocetka()
+       var s = obrada.getEntitet();
+       txtNaziv.setText(s.getNaziv());
+       txtMjestoOdrzavanja.setText(s.getMjestoodrzavanja());
+       txtOdgovorniClan.setText(s.getOdgovorniclan());
+       cmbMotoKlubovi.setSelectedItem(s.getMotoklub());
+       if(s.getDatumpocetka()!=null){
+             LocalDate ld = s.getDatumpocetka()
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
@@ -366,7 +386,23 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
             dpDatumPocetka.setDate(null);
         }
        
-       cmbMotoKlubovi.setSelectedItem(e.getMotoklub());
+       DefaultListModel<Smjestaj> m = new DefaultListModel<>();
+       if(s.getSmjestaji()!=null){
+           m.addAll(s.getSmjestaji());
+       }
+     
+        lstSmjestajiNaMotoDogadjaju.setModel(m);
+        lstSmjestajiNaMotoDogadjaju.repaint();
+       
+       
+       
+       btnObrisi.setVisible(false);
+       if(s.getSmjestaji()==null || s.getSmjestaji().isEmpty()){
+           btnObrisi.setVisible(true);
+           
+       }
+       
+       
     }
     
 
@@ -384,6 +420,17 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                             .toInstant())
                             : null);
     
+        List<Smjestaj> smjestaji = new ArrayList<>();
+        try {
+            DefaultListModel<Smjestaj> m = (DefaultListModel<Smjestaj>) lstSmjestajiNaMotoDogadjaju.getModel();
+            for(int i=0;i<m.getSize();i++){
+                smjestaji.add(m.getElementAt(i));
+            }
+        } catch (Exception ex) {
+            
+        }
+        e.setSmjestaji(smjestaji);
+        
         
     }
 
@@ -403,12 +450,15 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private javax.swing.JComboBox<MotoKlub> cmbMotoKlubovi;
     private com.github.lgooddatepicker.components.DatePicker dpDatumPocetka;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<MotoDogadjaj> lstPodaci;
+    private javax.swing.JList<Smjestaj> lstSmjestajiNaMotoDogadjaju;
     private javax.swing.JTextField txtMjestoOdrzavanja;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtOdgovorniClan;

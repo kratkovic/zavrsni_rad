@@ -41,6 +41,7 @@ public class ObradaMotoDogadjaj extends Obrada<MotoDogadjaj> {
 
     @Override
     protected void kontrolaBrisanje() throws MotoVodicException {
+        
 
     }
 

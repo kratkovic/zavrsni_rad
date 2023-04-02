@@ -237,7 +237,13 @@ public class ProzorServis extends javax.swing.JFrame {
         txtMjesto.setText(s.getMjesto());
         txtRadnoVrijeme.setText(s.getRadnovrijeme());
         
+             
         
+        
+       btnObrisi.setVisible(false);
+       if(s.getSmjestaji()==null || s.getSmjestaji().isEmpty()){
+           btnObrisi.setVisible(true);
+       }
        
     }
     

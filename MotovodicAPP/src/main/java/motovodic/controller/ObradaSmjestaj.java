@@ -7,6 +7,7 @@ package motovodic.controller;
 import java.math.BigDecimal;
 import java.util.List;
 import motovodic.model.Smjestaj;
+import motovodic.model.Servis;
 import motovodic.util.MotoVodicException;
 
 
