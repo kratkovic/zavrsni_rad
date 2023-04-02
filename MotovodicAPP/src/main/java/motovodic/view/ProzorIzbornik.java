@@ -12,10 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import motovodic.util.Aplikacija;
 
-/**
- *
- * @author Kiki
- */
+
 public class ProzorIzbornik extends javax.swing.JFrame {
 
     /**
