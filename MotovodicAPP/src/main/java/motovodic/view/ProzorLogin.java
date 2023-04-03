@@ -9,10 +9,7 @@ import motovodic.controller.ObradaOperater;
 import motovodic.model.Operater;
 import motovodic.util.Aplikacija;
 
-/**
- *
- * @author Kiki
- */
+
 public class ProzorLogin extends javax.swing.JFrame {
 
     
