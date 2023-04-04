@@ -25,10 +25,7 @@ import motovodic.model.Smjestaj;
 import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
 
-/**
- *
- * @author Kiki
- */
+
 public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicViewSucelje{
     
     private ObradaMotoDogadjaj obrada;
