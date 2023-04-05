@@ -473,7 +473,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
        if(lstSmjestajiNaMotoDogadjaju.getSelectedValuesList()==null
                 || lstSmjestajiNaMotoDogadjaju.getSelectedValuesList().isEmpty()){
             JOptionPane.showMessageDialog(getRootPane(),
-                    "Prvo odaberite smještaje na motodogđaju");
+                    "Prvo odaberite smještaje na motodogađaju");
             return;
         }
         
@@ -489,7 +489,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     
     private void ucitajSmjestaje(){
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
-       // m.addAll(obradaSmjestaj.read(txtUvjet.getText().trim()));
+        m.addAll(obradaSmjestaj.read(txtUvjet.getText().trim()));
         lstSmjestajiUBazi.setModel(m);
         lstSmjestajiUBazi.repaint();
     }

@@ -17,6 +17,37 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     public List<Smjestaj> read() {
         return session.createQuery("from Smjestaj order by naziv", Smjestaj.class).list();
     }
+    
+    public List<Smjestaj> read(String uvjet) {
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+       return session.createQuery("from Smjestaj "
+               + " where concat(naziv,' ',vrsta,' ', cijena) "
+               + " like :uvjet "
+               + " order by naziv, vrsta ", 
+               Smjestaj.class)
+               .setParameter("uvjet", uvjet)
+               .setMaxResults(12)
+               .list();
+    }
+    public List<Smjestaj> read(String uvjet, 
+            boolean traziOdPocetkaNaziva) {
+        uvjet=uvjet.trim();
+        if(traziOdPocetkaNaziva){
+            uvjet = uvjet + "%";
+        }else{
+            uvjet = "%" + uvjet + "%";
+        }
+        
+       return session.createQuery("from Smjestaj "
+               + " where concat(naziv,' ',vrsta,' ',cijena) "
+               + " like :uvjet "
+               + " order by naziv, vrsta ", 
+               Smjestaj.class)
+               .setParameter("uvjet", uvjet)
+               .setMaxResults(12)
+               .list();
+    }
 
     @Override
     protected void kontrolaUnos() throws MotoVodicException {
