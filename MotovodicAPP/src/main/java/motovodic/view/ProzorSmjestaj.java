@@ -20,10 +20,7 @@ import motovodic.model.Smjestaj;
 import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
 
-/**
- *
- * @author Kiki
- */
+
 public class ProzorSmjestaj extends javax.swing.JFrame {
 
     private ObradaSmjestaj obrada;
