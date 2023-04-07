@@ -22,7 +22,7 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
         uvjet=uvjet.trim();
         uvjet = "%" + uvjet + "%";
        return session.createQuery("from Smjestaj "
-               + " where concat(naziv,' ',vrsta,' ', cijena) "
+               + " where concat(naziv,' ') "
                + " like :uvjet "
                + " order by naziv, vrsta ", 
                Smjestaj.class)

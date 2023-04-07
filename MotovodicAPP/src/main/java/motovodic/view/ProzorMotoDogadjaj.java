@@ -548,6 +548,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                             .atZone(ZoneId.systemDefault())
                             .toInstant())
                             : null);
+        e.setMotoklub((MotoKlub) cmbFilterMotoKlubovi.getSelectedItem());
         
         
     
