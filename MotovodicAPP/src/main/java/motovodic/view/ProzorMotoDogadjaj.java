@@ -536,7 +536,6 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
        
     }
     
-
    @Override
    public void napuniModel() {
         var e = obrada.getEntitet();
