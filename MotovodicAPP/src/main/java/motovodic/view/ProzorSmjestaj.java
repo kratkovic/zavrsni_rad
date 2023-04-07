@@ -7,6 +7,7 @@ package motovodic.view;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -19,7 +20,6 @@ import motovodic.model.Servis;
 import motovodic.model.Smjestaj;
 import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
-
 
 public class ProzorSmjestaj extends javax.swing.JFrame {
 
@@ -41,40 +41,44 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         ucitajServise();
         ucitaj();
     }
-    
-    private void ucitajMotoDogadjaje(){
-            DefaultComboBoxModel<MotoDogadjaj> m = new DefaultComboBoxModel<>();
-            MotoDogadjaj md = new MotoDogadjaj();
-            md.setSifra(0);
-            md.setNaziv("Odaberite");
-            md.setMjestoodrzavanja("moto događaj");
-            m.addElement(md);
-            m.addAll(new ObradaMotoDogadjaj().read());
-            cmbMotoDogadjaji.setModel(m);
-            cmbMotoDogadjaji.repaint();
-            
-            
-    
-}
-    
-    private void ucitajServise(){
-            DefaultComboBoxModel<Servis> m = new DefaultComboBoxModel<>();
-            Servis s = new Servis();
-            s.setSifra(0);
-            s.setNaziv("Odaberite");
-            s.setMjesto("servis");
-            m.addElement(s);
-            m.addAll(new ObradaServis().read());
-            cmbServisi.setModel(m);
-            cmbServisi.repaint();
+
+    private void ucitajMotoDogadjaje() {
+        DefaultComboBoxModel<MotoDogadjaj> m = new DefaultComboBoxModel<>();
+        MotoDogadjaj md = new MotoDogadjaj();
+        md.setSifra(0);
+        md.setNaziv("Odaberite");
+        md.setMjestoodrzavanja("moto događaj");
+        m.addElement(md);
+        m.addAll(new ObradaMotoDogadjaj().read());
+        cmbMotoDogadjaji.setModel(m);
+        cmbMotoDogadjaji.repaint();
+
     }
-    
+
+    private void ucitajServise() {
+        DefaultComboBoxModel<Servis> m = new DefaultComboBoxModel<>();
+        Servis s = new Servis();
+        s.setSifra(0);
+        s.setNaziv("Odaberite");
+        s.setMjesto("servis");
+        m.addElement(s);
+        m.addAll(new ObradaServis().read());
+        cmbServisi.setModel(m);
+        cmbServisi.repaint();
+    }
+
     private void ucitaj() {
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
-        m.addAll(obrada.read());
+        List<Smjestaj> smjestaji = obrada.read();
+        for (Smjestaj s : smjestaji) {
+            MotoDogadjaj motoDogadjaj = s.getMotoDogadjaj();
+            if (motoDogadjaj != null) {
+                motoDogadjaj.getSmjestaji().add(s);
+            }
+        }
+        m.addAll(smjestaji);
         lstPodaci.setModel(m);
         lstPodaci.repaint();
-
     }
 
     /**
@@ -105,6 +109,11 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstPodaciMouseClicked(evt);
+            }
+        });
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstPodaciValueChanged(evt);
@@ -338,18 +347,27 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbServisiActionPerformed
 
+    private void lstPodaciMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPodaciMouseClicked
+        if (evt.getClickCount() == 1) {
+            Smjestaj s = lstPodaci.getSelectedValue();
+            if (s != null) {
+                cmbMotoDogadjaji.setSelectedItem(s.getMotoDogadjaj());
+                cmbServisi.setSelectedItem(s.getServis());
+            }
+        }
+
+    }//GEN-LAST:event_lstPodaciMouseClicked
+
     private void napuniView() {
         var s = obrada.getEntitet();
         txtNaziv.setText(s.getNaziv());
         txtVrsta.setText(s.getVrsta());
-         try {
+        try {
             txtCijena.setText(df.format(s.getCijena()));
         } catch (Exception e) {
             txtCijena.setText("");
         }
-         
-     
-   
+
     }
 
     private void napuniModel() {
@@ -367,12 +385,22 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         } catch (Exception e) {
             s.setCijena(BigDecimal.ZERO);
         }
+        MotoDogadjaj motoDogadjaj = (MotoDogadjaj) cmbMotoDogadjaji.getSelectedItem();
+        if (motoDogadjaj != null) {
+            s.setMotoDogadjaj(motoDogadjaj);
+        } else {
+            s.setMotoDogadjaj(null);
+            Servis servis = (Servis) cmbServisi.getSelectedItem();
+            if (servis != null) {
+                s.setServis(servis);
+            } else {
+                s.setServis(null);
+            }
+        }
     }
-
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
@@ -390,5 +418,9 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtVrsta;
     // End of variables declaration//GEN-END:variables
+
+    private void cmbSmjestajiItemStateChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

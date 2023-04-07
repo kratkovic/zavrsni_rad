@@ -548,6 +548,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                             .atZone(ZoneId.systemDefault())
                             .toInstant())
                             : null);
+        
+        
     
         List<Smjestaj> smjestaji = new ArrayList<>();
         try {
