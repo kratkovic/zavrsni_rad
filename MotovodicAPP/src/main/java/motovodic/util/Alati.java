@@ -38,6 +38,7 @@ public class Alati {
         return "";
     }
 
+    
     public static boolean kontrolaOIB(String oib) {
         if (oib == null || oib.length() != 11) {
             return false;
