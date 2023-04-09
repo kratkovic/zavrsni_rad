@@ -321,22 +321,36 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
                     "Prvo odaberite smještaj");
             return;
         }
-        if (JOptionPane.showConfirmDialog(
+
+        int odabir = JOptionPane.showConfirmDialog(
                 getRootPane(),
                 "Sigurno obrisati " + obrada.getEntitet().getNaziv() + "?",
                 "Brisanje",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (odabir == JOptionPane.NO_OPTION) {
             return;
         }
-        try {
 
+        try {
+            Smjestaj smjestaj = obrada.getEntitet();
+
+            // provjeri postojanje veze s moto događajem
+            if (smjestaj.getMotoDogadjaj() != null) {
+                JOptionPane.showMessageDialog(getRootPane(),
+                        "Ne možete obrisati smještaj koji je vezan s moto događajem");
+                return;
+            }
+
+            // ako veze nema, obriši smještaj
             obrada.delete();
             ucitaj();
         } catch (MotoVodicException ex) {
             JOptionPane.showMessageDialog(getRootPane(),
                     ex.getPoruka());
         }
+
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void cmbMotoDogadjajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMotoDogadjajiActionPerformed
@@ -366,6 +380,12 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             txtCijena.setText(df.format(s.getCijena()));
         } catch (Exception e) {
             txtCijena.setText("");
+        }
+        btnObrisi.setVisible(false);
+        if (s.getMotoDogadjaj() == null) {
+            btnObrisi.setVisible(true);
+        } else {
+            btnObrisi.setVisible(false);
         }
 
     }
