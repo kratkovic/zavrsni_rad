@@ -75,10 +75,14 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             if (motoDogadjaj != null) {
                 motoDogadjaj.getSmjestaji().add(s);
             }
+            Servis servis = s.getServis();
+            if (servis != null) {
+                servis.getSmjestaji().add(s);
+            }
+            m.addAll(smjestaji);
+            lstPodaci.setModel(m);
+            lstPodaci.repaint();
         }
-        m.addAll(smjestaji);
-        lstPodaci.setModel(m);
-        lstPodaci.repaint();
     }
 
     /**
@@ -395,13 +399,9 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         s.setNaziv(txtNaziv.getText());
         s.setVrsta(txtVrsta.getText());
         try {
-            s.setCijena(
-                    BigDecimal.valueOf(
-                            df.parse(
-                                    txtCijena.getText())
-                                    .doubleValue()
-                    )
-            );
+            s.setCijena(BigDecimal.valueOf(
+                    df.parse(txtCijena.getText()).doubleValue()
+            ));
         } catch (Exception e) {
             s.setCijena(BigDecimal.ZERO);
         }
@@ -410,15 +410,15 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             s.setMotoDogadjaj(motoDogadjaj);
         } else {
             s.setMotoDogadjaj(null);
-            Servis servis = (Servis) cmbServisi.getSelectedItem();
-            if (servis != null) {
-                s.setServis(servis);
-            } else {
-                s.setServis(null);
-            }
-            
+        }
+        Servis servis = (Servis) cmbServisi.getSelectedItem();
+        if (servis != null) {
+            s.setServis(servis);
+        } else {
+            s.setServis(null);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -439,7 +439,5 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtVrsta;
     // End of variables declaration//GEN-END:variables
-
-   
 
 }
