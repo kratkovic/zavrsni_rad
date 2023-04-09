@@ -416,6 +416,7 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             } else {
                 s.setServis(null);
             }
+            
         }
     }
     /**
@@ -439,8 +440,6 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     private javax.swing.JTextField txtVrsta;
     // End of variables declaration//GEN-END:variables
 
-    private void cmbSmjestajiItemStateChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 
 }
