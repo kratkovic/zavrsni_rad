@@ -4,8 +4,6 @@
  */
 package motovodic.util;
 
-
-
 public class MotoVodicException extends Exception{
     
     private String poruka;
