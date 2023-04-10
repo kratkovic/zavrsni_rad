@@ -385,6 +385,10 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         } catch (Exception e) {
             txtCijena.setText("");
         }
+        
+        cmbMotoDogadjaji.setSelectedItem(s.getMotoDogadjaj());
+                cmbServisi.setSelectedItem(s.getServis());
+        
         btnObrisi.setVisible(false);
         if (s.getMotoDogadjaj() == null) {
             btnObrisi.setVisible(true);
