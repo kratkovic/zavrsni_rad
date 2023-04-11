@@ -30,6 +30,8 @@ public class PocetniInsert {
     private List<Servis> servisi;
     private Session session;
     
+    
+    
     public PocetniInsert(){
         faker = new Faker();
         motoklubovi = new ArrayList<>();
