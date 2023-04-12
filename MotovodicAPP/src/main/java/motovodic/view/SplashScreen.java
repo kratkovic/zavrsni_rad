@@ -9,10 +9,7 @@ import motovodic.controller.ObradaOperater;
 import motovodic.util.HibernateUtil;
 import org.hibernate.Session;
 
-/**
- *
- * @author Kiki
- */
+
 public class SplashScreen extends javax.swing.JFrame {
 
     /**
