@@ -68,7 +68,6 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
     }
 
     private void ucitaj() {
-        DefaultListModel<Smjestaj> m = new DefaultListModel<>();
         List<Smjestaj> smjestaji = obrada.read();
         for (Smjestaj s : smjestaji) {
             MotoDogadjaj motoDogadjaj = s.getMotoDogadjaj();
@@ -79,12 +78,12 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
             if (servis != null) {
                 servis.getSmjestaji().add(s);
             }
-            m.addAll(smjestaji);
-            lstPodaci.setModel(m);
-            lstPodaci.repaint();
         }
-    }
-
+        DefaultListModel<Smjestaj> m = new DefaultListModel<>();
+        m.addAll(smjestaji);
+        lstPodaci.setModel(m);
+        }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
