@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package motovodic;
 
 import java.util.logging.Level;
@@ -13,15 +12,12 @@ import motovodic.util.MotoVodicException;
 import motovodic.util.PocetniInsert;
 import motovodic.view.SplashScreen;
 
-
-
 public class Start {
 
     public static void main(String[] args) {
-    new SplashScreen().setVisible(true);
-   //new PocetniInsert();
-        }
-       
-       
+        new PocetniInsert();
+        new SplashScreen().setVisible(true);
+
     }
 
+}

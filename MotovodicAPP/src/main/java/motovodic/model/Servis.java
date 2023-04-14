@@ -7,6 +7,7 @@ package motovodic.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +23,7 @@ public class Servis extends Entitet {
 
     public Servis() {
         super();
-        
+        smjestaji = new ArrayList<>(); // inicijalizacija prazne liste
     }
 
     public Servis(String naziv, String mjesto, String radnovrijeme, List<Smjestaj> smjestaji, int sifra) {
@@ -30,6 +31,7 @@ public class Servis extends Entitet {
         this.naziv = naziv;
         this.mjesto = mjesto;
         this.radnovrijeme = radnovrijeme;
+        this.smjestaji = smjestaji;
     }
 
     public String getNaziv() {
@@ -56,18 +58,17 @@ public class Servis extends Entitet {
         this.radnovrijeme = radnovrijeme;
     }
     
-     public List<Smjestaj> getSmjestaji() {
+    public List<Smjestaj> getSmjestaji() {
         return smjestaji;
     }
 
-    public void setMotoDogadaji(List<MotoDogadjaj> motoDogadjaji) {
+    public void setSmjestaji(List<Smjestaj> smjestaji) {
         this.smjestaji = smjestaji;
     }
-    
     
     @Override
     public String toString() {
         return naziv + " " + mjesto;
     }
-
 }
+

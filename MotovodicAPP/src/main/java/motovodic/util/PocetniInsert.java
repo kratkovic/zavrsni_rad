@@ -26,8 +26,8 @@ public class PocetniInsert {
     private Faker faker;
     private List<MotoKlub> motoklubovi;
     private List<MotoDogadjaj> motodogadaji;
-    private List<Smjestaj> smjestaji;
     private List<Servis> servisi;
+    private List<Smjestaj> smjestaji;
     private Session session;
     
     
