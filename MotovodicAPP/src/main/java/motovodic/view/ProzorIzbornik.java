@@ -64,6 +64,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
+        btnGit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -79,6 +80,13 @@ public class ProzorIzbornik extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
         jToolBar1.add(lblVrijeme);
+
+        btnGit.setText("Git");
+        btnGit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGitActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Aplikacija");
 
@@ -155,11 +163,17 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGit)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(btnGit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -197,11 +211,22 @@ public class ProzorIzbornik extends javax.swing.JFrame {
       new ProzorSmjestaj().setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
+                                           
+     String url = "https://github.com/kratkovic/zavrsni_rad/tree/main/MotovodicAPP";
+     try {
+         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+     } catch (java.io.IOException e) {
+         System.out.println(e.getMessage());
+     }
+    }//GEN-LAST:event_btnGitActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGit;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
