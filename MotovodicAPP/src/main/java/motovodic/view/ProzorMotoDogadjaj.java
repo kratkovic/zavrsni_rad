@@ -526,20 +526,24 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
        txtMjestoOdrzavanja.setText(s.getMjestoodrzavanja());
        txtOdgovorniClan.setText(s.getOdgovorniclan());
        if(s.getDatumpocetka()!=null){
-             LocalDate ld = s.getDatumpocetka()
+             LocalDateTime ld = s.getDatumpocetka()
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-        dtpDatumIVrijemePocetka.datePicker.setDate(ld);
-        }else{
+                .toLocalDateTime();
+        dtpDatumIVrijemePocetka.datePicker.setDate(ld.toLocalDate());
+        dtpDatumIVrijemePocetka.timePicker.setTime(ld.toLocalTime());
+        }
+        else
+        {
             dtpDatumIVrijemePocetka.datePicker.setDate(null);
+            dtpDatumIVrijemePocetka.timePicker.setTime(null);
         }
        
        DefaultListModel<Smjestaj> m = new DefaultListModel<>();
        if(s.getSmjestaji()!=null){
            m.addAll(s.getSmjestaji());
        }
-     
+        
         lstSmjestajiNaMotoDogadjaju.setModel(m);
         lstSmjestajiNaMotoDogadjaju.repaint();
        

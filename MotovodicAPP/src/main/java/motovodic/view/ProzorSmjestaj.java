@@ -72,11 +72,11 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         for (Smjestaj s : smjestaji) {
             MotoDogadjaj motoDogadjaj = s.getMotoDogadjaj();
             if (motoDogadjaj != null) {
-                motoDogadjaj.getSmjestaji().add(s);
+                motoDogadjaj.getSmjestaji();
             }
             Servis servis = s.getServis();
             if (servis != null) {
-                servis.getSmjestaji().add(s);
+                servis.getSmjestaji();
             }
         }
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
