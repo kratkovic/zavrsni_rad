@@ -82,8 +82,8 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
         m.addAll(smjestaji);
         lstPodaci.setModel(m);
-        }
-    
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -384,10 +384,10 @@ public class ProzorSmjestaj extends javax.swing.JFrame {
         } catch (Exception e) {
             txtCijena.setText("");
         }
-        
+
         cmbMotoDogadjaji.setSelectedItem(s.getMotoDogadjaj());
-                cmbServisi.setSelectedItem(s.getServis());
-        
+        cmbServisi.setSelectedItem(s.getServis());
+
         btnObrisi.setVisible(false);
         if (s.getMotoDogadjaj() == null) {
             btnObrisi.setVisible(true);
