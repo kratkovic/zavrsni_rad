@@ -5,8 +5,11 @@
 package motovodic.view;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -42,16 +45,13 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                 + Aplikacija.OPERATER.getImePrezime()
                 + ": Moto događaji");
         definirajDatumPocetka();
-        definirajVrijemePocetka();
         ucitajFilterMotoKlubovi();
         ucitajMotoKlubove();
         ucitaj();
         
     }
     
-    private void definirajVrijemePocetka(){
-        
-    }
+   
     
     private void definirajDatumPocetka(){
         DatePickerSettings dps = 
@@ -59,7 +59,26 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
         dps.setTranslationClear("Očisti");
         dps.setTranslationToday("Danas");
-        dpDatumPocetka.setSettings(dps);
+        dtpDatumIVrijemePocetka.datePicker.setSettings(dps);
+        
+        TimePickerSettings tps = new TimePickerSettings(new Locale("hr", "HR"));
+        tps.setFormatForDisplayTime("HH:mm");
+       dtpDatumIVrijemePocetka.timePicker
+                .getSettings()
+         
+               .use24HourClockFormat();
+        
+        ArrayList<LocalTime> lista = new ArrayList<>();
+        
+        for(int j=0;j<24;j++){
+        for(int i=0;i<60;i+=30){
+            lista.add(LocalTime.of(j, i));
+        }
+        }
+        
+        
+        dtpDatumIVrijemePocetka.timePicker.getSettings()
+                .generatePotentialMenuTimes(lista); 
     }
     
     private void ucitajMotoKlubove() {
@@ -102,7 +121,6 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         jLabel6 = new javax.swing.JLabel();
         txtOdgovorniClan = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        dpDatumPocetka = new com.github.lgooddatepicker.components.DatePicker();
         jLabel7 = new javax.swing.JLabel();
         txtMjestoOdrzavanja = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
@@ -118,6 +136,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         btnDodajSmjestaj = new javax.swing.JButton();
         btnObrisiSmjestaj = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        dtpDatumIVrijemePocetka = new com.github.lgooddatepicker.components.DateTimePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -252,7 +271,6 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(txtOdgovorniClan, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,7 +279,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                                 .addGap(11, 11, 11)
                                 .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(86, 86, 86)
-                                .addComponent(btnPromjeni))))
+                                .addComponent(btnPromjeni))
+                            .addComponent(dtpDatumIVrijemePocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(337, 337, 337)
                         .addComponent(btnObrisi)))
@@ -311,7 +330,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                                                 .addGap(24, 24, 24)
                                                 .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(dtpDatumIVrijemePocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(btnDodaj)
@@ -511,9 +530,9 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
-        dpDatumPocetka.setDate(ld);
+        dtpDatumIVrijemePocetka.datePicker.setDate(ld);
         }else{
-            dpDatumPocetka.setDate(null);
+            dtpDatumIVrijemePocetka.datePicker.setDate(null);
         }
        
        DefaultListModel<Smjestaj> m = new DefaultListModel<>();
@@ -541,13 +560,18 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         e.setNaziv(txtNaziv.getText());
         e.setMjestoodrzavanja(txtMjestoOdrzavanja.getText());
         e.setOdgovorniclan(txtOdgovorniClan.getText());
-        e.setDatumpocetka(dpDatumPocetka.getDate()!=null
-                            ? 
-                            Date.from(dpDatumPocetka.getDate()
-                            .atStartOfDay()
-                            .atZone(ZoneId.systemDefault())
-                            .toInstant())
-                            : null);
+        LocalDate ld = dtpDatumIVrijemePocetka.datePicker.getDate();
+ 
+        LocalTime lt = dtpDatumIVrijemePocetka.timePicker.getTime();
+   // dpDatumPocetka.timePicker.setTime(lt);
+         LocalDateTime fromDateAndTime = LocalDateTime.of(ld,
+                                                           lt);
+        
+        Date datum = Date.from(fromDateAndTime.atZone(ZoneId.systemDefault()).toInstant());
+        
+        
+        e.setDatumpocetka(datum);
+        
         e.setMotoklub((MotoKlub) cmbFilterMotoKlubovi.getSelectedItem());
         
         
@@ -582,7 +606,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JComboBox<MotoKlub> cmbFilterMotoKlubovi;
-    private com.github.lgooddatepicker.components.DatePicker dpDatumPocetka;
+    private com.github.lgooddatepicker.components.DateTimePicker dtpDatumIVrijemePocetka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
