@@ -78,7 +78,7 @@ public class SplashScreen extends javax.swing.JFrame {
                 new ProzorLogin().setVisible(true);
                 dispose();
             }else{
-                JOptionPane.showMessageDialog(getRootPane(), "Problem s bazom podatak");
+                JOptionPane.showMessageDialog(getRootPane(), "Problem s bazom podataka");
             }
            
         }
