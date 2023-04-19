@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import motovodic.util.Aplikacija;
 
-
 public class ProzorIzbornik extends javax.swing.JFrame {
 
     /**
@@ -20,10 +19,17 @@ public class ProzorIzbornik extends javax.swing.JFrame {
      */
     public ProzorIzbornik() {
         initComponents();
+
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime());
-
-        pokreniSat();
+        
+        ImageIcon pozadinaIcon = new ImageIcon(getClass().getResource("/resources/izbornikslika.jpg"));
+        java.awt.Image pozadinaImage = pozadinaIcon.getImage();
+        setContentPane(new javax.swing.JLabel(new ImageIcon(pozadinaImage)));
+        
+       pokreniSat();
+       
+       
 
     }
 
@@ -77,7 +83,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImages(null);
 
         jToolBar1.setRollover(true);
         jToolBar1.add(lblVrijeme);
@@ -174,7 +179,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(btnGit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -201,25 +206,25 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       new ProzorServis().setVisible(true);
+        new ProzorServis().setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      new ProzorMotoDogadjaj().setVisible(true);
+        new ProzorMotoDogadjaj().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-      new ProzorSmjestaj().setVisible(true);
+        new ProzorSmjestaj().setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void btnGitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGitActionPerformed
-                                           
-     String url = "https://github.com/kratkovic/zavrsni_rad/tree/main/MotovodicAPP";
-     try {
-         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-     } catch (java.io.IOException e) {
-         System.out.println(e.getMessage());
-     }
+
+        String url = "https://github.com/kratkovic/zavrsni_rad/tree/main/MotovodicAPP";
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnGitActionPerformed
 
     /**
