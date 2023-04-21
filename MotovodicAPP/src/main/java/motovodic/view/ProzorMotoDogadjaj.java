@@ -137,6 +137,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
         btnObrisiSmjestaj = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         dtpDatumIVrijemePocetka = new com.github.lgooddatepicker.components.DateTimePicker();
+        chbTrazi = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -243,6 +244,8 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
 
         jLabel3.setText("Smještaji u bazi");
 
+        chbTrazi.setText("Traži od početka imena");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,7 +300,10 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                         .addGap(80, 80, 80))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92))))
+                        .addGap(92, 92, 92))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(chbTrazi)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,9 +356,11 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTrazi))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chbTrazi)
+                        .addGap(2, 2, 2)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -507,7 +515,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     
     private void ucitajSmjestaje(){
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
-        m.addAll(obradaSmjestaj.read(txtUvjet.getText().trim()));
+        m.addAll(obradaSmjestaj.read(txtUvjet.getText().trim(),chbTrazi.isSelected()));
         lstSmjestajiUBazi.setModel(m);
         lstSmjestajiUBazi.repaint();
     }
@@ -609,6 +617,7 @@ public class ProzorMotoDogadjaj extends javax.swing.JFrame implements MotoVodicV
     private javax.swing.JButton btnObrisiSmjestaj;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
+    private javax.swing.JCheckBox chbTrazi;
     private javax.swing.JComboBox<MotoKlub> cmbFilterMotoKlubovi;
     private com.github.lgooddatepicker.components.DateTimePicker dtpDatumIVrijemePocetka;
     private javax.swing.JLabel jLabel1;

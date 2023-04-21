@@ -89,6 +89,10 @@
                       <Component id="jScrollPane3" min="-2" pref="181" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="chbTrazi" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
       </Group>
@@ -156,11 +160,13 @@
                           <Component id="txtUvjet" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="chbTrazi" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="243" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -342,6 +348,11 @@
       </Properties>
     </Component>
     <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dtpDatumIVrijemePocetka">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chbTrazi">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tra&#x17e;i od po&#x10d;etka imena"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

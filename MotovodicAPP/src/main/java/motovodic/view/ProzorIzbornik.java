@@ -23,9 +23,9 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime());
         
-        ImageIcon pozadinaIcon = new ImageIcon(getClass().getResource("/resources/izbornikslika.jpg"));
-        java.awt.Image pozadinaImage = pozadinaIcon.getImage();
-        setContentPane(new javax.swing.JLabel(new ImageIcon(pozadinaImage)));
+       // ImageIcon pozadinaIcon = new ImageIcon(getClass().getResource("/resources/izbornikslika.jpg"));
+      //  java.awt.Image pozadinaImage = pozadinaIcon.getImage();
+       // setContentPane(new javax.swing.JLabel(new ImageIcon(pozadinaImage)));
         
        pokreniSat();
        
