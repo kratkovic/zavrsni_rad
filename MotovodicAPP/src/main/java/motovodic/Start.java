@@ -15,7 +15,7 @@ import motovodic.view.SplashScreen;
 public class Start {
 
     public static void main(String[] args) {
-        //new PocetniInsert();
+       // new PocetniInsert();
         new SplashScreen().setVisible(true);
 
     }
