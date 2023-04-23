@@ -46,6 +46,7 @@ public class PocetniInsert {
         kreirajSmjestaje();
         
         session.getTransaction().commit();
+        HibernateUtil.CloseSession();
     }
     
     private void kreirajMotoKlubove(){
