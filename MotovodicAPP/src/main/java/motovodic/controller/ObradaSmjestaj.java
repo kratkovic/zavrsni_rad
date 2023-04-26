@@ -9,6 +9,7 @@ import java.util.List;
 import motovodic.model.Smjestaj;
 import motovodic.model.Servis;
 import motovodic.util.MotoVodicException;
+import org.hibernate.HibernateException;
 
 
 public class ObradaSmjestaj extends Obrada<Smjestaj>{
@@ -48,6 +49,19 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
                .setMaxResults(12)
                .list();
     }
+    
+    public void update(Smjestaj smjestaj) throws MotoVodicException {
+    try {
+        session.beginTransaction();
+        session.merge(smjestaj);
+        session.getTransaction().commit();
+    } catch (HibernateException e) {
+        if (session.getTransaction() != null) {
+            session.getTransaction().rollback();
+        }
+        throw new MotoVodicException("Greška prilikom ažuriranja smještaja: " + e.getMessage());
+    }
+}
 
     @Override
     protected void kontrolaUnos() throws MotoVodicException {

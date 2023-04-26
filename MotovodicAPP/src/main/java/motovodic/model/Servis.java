@@ -4,6 +4,7 @@
  */
 package motovodic.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -18,7 +19,7 @@ public class Servis extends Entitet {
     private String mjesto;
     private String radnovrijeme;
 
-    @OneToMany(mappedBy = "servis")
+    @OneToMany(mappedBy = "servis", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Smjestaj> smjestaji;
 
     public Servis() {
@@ -65,10 +66,14 @@ public class Servis extends Entitet {
     public void setSmjestaji(List<Smjestaj> smjestaji) {
         this.smjestaji = smjestaji;
     }
+
+    public void removeSmjestaj(Smjestaj smjestaj) {
+        smjestaji.remove(smjestaj);
+        smjestaj.setServis(null);
+    }
     
     @Override
     public String toString() {
         return naziv + " " + mjesto;
     }
 }
-

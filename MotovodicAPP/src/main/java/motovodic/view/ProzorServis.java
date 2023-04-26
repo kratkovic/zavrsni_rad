@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import motovodic.controller.ObradaServis;
+import motovodic.controller.ObradaSmjestaj;
 import motovodic.model.Smjestaj;
 import motovodic.model.Servis;
 import motovodic.util.Aplikacija;
@@ -21,12 +22,14 @@ import motovodic.util.MotoVodicException;
 public class ProzorServis extends javax.swing.JFrame {
 
     private ObradaServis obrada;
+    private ObradaSmjestaj obradaSmjestaj;
 
     /**
      * Creates new form ProzorServis
      */
     public ProzorServis() {
         initComponents();
+         obradaSmjestaj = new ObradaSmjestaj();
         obrada = new ObradaServis();
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
@@ -207,27 +210,47 @@ public class ProzorServis extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-      if (lstPodaci.getSelectedValue() == null) {
-            JOptionPane.showMessageDialog(getRootPane(),
-                    "Prvo odaberite servis");
-            return;
-        }
-        if (JOptionPane.showConfirmDialog(
-                getRootPane(),
-                "Sigurno obrisati " + obrada.getEntitet().getNaziv() + "?",
-                "Brisanje",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
-            return;
-        }
-        try {
+                                           
+    if (lstPodaci.getSelectedValue() == null) {
+        JOptionPane.showMessageDialog(getRootPane(),
+                "Prvo odaberite servis");
+        return;
+    }
 
-            obrada.delete();
-            ucitaj();
+    // Pronalazi se odabrani servis
+    Servis servis = lstPodaci.getSelectedValue();
+
+    // Uklanja se servis iz svakog povezanog smještaja
+    for (Smjestaj smjestaj : servis.getSmjestaji()) {
+        smjestaj.setServis(null);
+        try {
+            obradaSmjestaj.update(smjestaj);
         } catch (MotoVodicException ex) {
             JOptionPane.showMessageDialog(getRootPane(),
-                     ex.getPoruka());
+                ex.getPoruka());
         }
+    }
+
+    // Potvrda brisanja servisa
+    if (JOptionPane.showConfirmDialog(
+            getRootPane(),
+            "Sigurno obrisati " + servis.getNaziv() + "?",
+            "Brisanje",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+        return;
+    }
+
+    // Briše se servis
+    try {
+        obrada.delete();
+        ucitaj();
+    } catch (MotoVodicException ex) {
+        JOptionPane.showMessageDialog(getRootPane(),
+                 ex.getPoruka());
+    }
+
+
 
     }//GEN-LAST:event_btnObrisiActionPerformed
 
