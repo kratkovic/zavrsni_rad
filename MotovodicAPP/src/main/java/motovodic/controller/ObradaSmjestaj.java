@@ -11,7 +11,6 @@ import motovodic.model.Servis;
 import motovodic.util.MotoVodicException;
 import org.hibernate.HibernateException;
 
-
 public class ObradaSmjestaj extends Obrada<Smjestaj>{
 
     @Override

@@ -16,7 +16,6 @@ import motovodic.util.Aplikacija;
 import motovodic.util.MotoVodicException;
 
 
-
 public class ProzorMotoKlub extends javax.swing.JFrame {
 
     private ObradaMotoKlub obrada;

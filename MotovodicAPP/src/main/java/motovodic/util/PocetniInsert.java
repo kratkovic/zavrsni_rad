@@ -15,6 +15,7 @@ import motovodic.model.Servis;
 import motovodic.model.Smjestaj;
 import org.hibernate.Session;
 
+
 public class PocetniInsert {
 
     private static final int BROJ_MOTOKLUBOVA = 30;
