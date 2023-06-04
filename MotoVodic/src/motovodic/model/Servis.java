@@ -16,6 +16,8 @@ public class Servis extends Entitet {
 		this.mjesto = mjesto;
 		this.radnoVrijeme = radnoVrijeme;
 	}
+	
+	
 	public String getNaziv() {
 		return naziv;
 	}
