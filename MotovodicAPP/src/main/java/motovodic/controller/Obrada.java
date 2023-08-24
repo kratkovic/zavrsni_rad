@@ -17,7 +17,7 @@ public abstract class Obrada<T extends Entitet> {
 
     public abstract List<T> read();
 
-    protected abstract void kontrolaUnos() throws MotoVodicException;
+    protected abstract void kontrolaUnos () throws MotoVodicException;
 
     protected abstract void kontrolaPromjena() throws MotoVodicException;
 
